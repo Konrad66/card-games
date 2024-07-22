@@ -6,11 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import konrad.poker.server.Card;
-import konrad.poker.server.Player;
-import konrad.poker.server.PokerService;
 
-import static konrad.poker.client.PokerGame.CARD_WEIGHT;
 import static konrad.poker.client.PokerGame.WINDOW_SIZE;
 
 public class GameScreen implements Screen {

@@ -5,17 +5,23 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import konrad.poker.server.Card;
+import org.w3c.dom.Text;
 
 public class CardActor extends Actor {
 
-    private Card card;
-    private Texture texture;
     private static final String CARDS_PATH = "cards/";
+    private static final String REVERS_PATH = CARDS_PATH + "card_back/cardBackBlue.png";
+
+    private Card card;
+    private Texture aversTexture;
+    private Texture reversTexture;
+
 
     public CardActor(Card card) {
         this.card = card;
         String path = filesPath(card);
-        texture = new Texture(Gdx.files.internal(path));
+        aversTexture = new Texture(Gdx.files.internal(path));
+        reversTexture = new Texture(Gdx.files.internal(REVERS_PATH));
         setBounds(0, 0, PokerGame.CARD_WEIGHT, PokerGame.CARD_HEIGHT);
     }
 
@@ -36,6 +42,10 @@ public class CardActor extends Actor {
 //417 x 654
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        Texture texture = aversTexture;
+        if (card.isHidden()) {
+            texture = reversTexture;
+        }
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 

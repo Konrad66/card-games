@@ -27,7 +27,9 @@ public class PokerService {
     }
 
     public Player getPlayer(){
-        return new Player(1000, cardDeck.get(6), cardDeck.get(50));
+        Card card = cardDeck.get(6);
+        card.setHidden(false);
+        return new Player(1000, card, cardDeck.get(50));
     }
 
 
