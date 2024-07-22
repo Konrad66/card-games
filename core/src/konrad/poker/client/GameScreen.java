@@ -31,15 +31,17 @@ public class GameScreen implements Screen {
        Player player1 = pokerService.getPlayer();
         System.out.println(player1); // jego dwie karty + ile ma kasy na start
         MoneyActor moneyActor = new MoneyActor(player1,pokerGame.getFont());
-        stage.addActor(moneyActor);
-        moneyActor.setX(400);
         HandGroup hand = new HandGroup();
         CardActor card1 = new CardActor(player1.getCard1());
         CardActor card2 = new CardActor(player1.getCard2());
         hand.addActor(card1);
         hand.addActor(card2);
-        stage.addActor(hand);
-        hand.setX(200);
+
+        PlayerGroup playerGroup = new PlayerGroup(hand,moneyActor);
+        stage.addActor(playerGroup);
+        playerGroup.setX(WINDOW_SIZE/2 - playerGroup.getWidth()/2);
+
+
 
 
     }

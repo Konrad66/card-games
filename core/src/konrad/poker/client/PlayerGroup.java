@@ -1,4 +1,18 @@
 package konrad.poker.client;
 
-public class PlayerGroup {
+import com.badlogic.gdx.scenes.scene2d.Group;
+
+public class PlayerGroup extends Group {
+
+   private HandGroup handGroup;
+   private MoneyActor moneyActor;
+
+    public PlayerGroup(HandGroup handGroup, MoneyActor moneyActor) {
+        this.handGroup = handGroup;
+        this.moneyActor = moneyActor;
+        addActor(handGroup);
+        addActor(moneyActor);
+        moneyActor.setX(handGroup.getWidth());
+        setWidth(handGroup.getWidth() + moneyActor.getWidth());
+    }
 }
