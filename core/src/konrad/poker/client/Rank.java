@@ -8,7 +8,7 @@ public enum Rank {
 
     private String symbol;
 
-    Rank(int power, String symbol) {
+   Rank(int power, String symbol) {
         this.power = power;
         this.symbol = symbol;
     }

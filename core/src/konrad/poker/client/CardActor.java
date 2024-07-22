@@ -16,7 +16,7 @@ public class CardActor extends Actor {
         this.card = card;
         String path = filesPath(card);
         texture = new Texture(Gdx.files.internal(path));
-        setBounds(0, 0, 100, 100);
+        setBounds(0, 0, PokerGame.CARD_WEIGHT, PokerGame.CARD_HEIGHT);
     }
 
     private String filesPath(Card card) {
@@ -33,9 +33,12 @@ public class CardActor extends Actor {
 
     //concatenacja - używanie + do łączenia stringów
 
-
+//417 x 654
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
+
+
+    // 2 
 }

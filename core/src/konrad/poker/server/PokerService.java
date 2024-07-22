@@ -5,6 +5,7 @@ import konrad.poker.client.Rank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class PokerService {
 
@@ -25,4 +26,10 @@ public class PokerService {
     public Card getCard() {
         return cardDeck.get(4);
     }
+
+    public Player getPlayer(){
+        return new Player(1000, cardDeck.get(6), cardDeck.get(50));
+    }
+
+
 }
