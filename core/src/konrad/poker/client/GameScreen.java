@@ -29,7 +29,7 @@ public class GameScreen implements Screen {
 
        Player player1 = pokerService.getPlayer();
         System.out.println(player1); // jego dwie karty + ile ma kasy na start
-        MoneyActor moneyActor = new MoneyActor(player1);
+        MoneyActor moneyActor = new MoneyActor(player1,pokerGame.getFont());
         stage.addActor(moneyActor);
         moneyActor.setX(400);
     }

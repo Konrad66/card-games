@@ -30,4 +30,8 @@ public class PokerGame extends Game {
     public SpriteBatch getBatch() {
         return batch;
     }
+
+    public BitmapFont getFont() {
+        return font;
+    }
 }
