@@ -10,6 +10,7 @@ import konrad.poker.server.Card;
 import konrad.poker.server.Player;
 import konrad.poker.server.PokerService;
 
+import static konrad.poker.client.PokerGame.CARD_WEIGHT;
 import static konrad.poker.client.PokerGame.WINDOW_SIZE;
 
 public class GameScreen implements Screen {
@@ -32,6 +33,15 @@ public class GameScreen implements Screen {
         MoneyActor moneyActor = new MoneyActor(player1,pokerGame.getFont());
         stage.addActor(moneyActor);
         moneyActor.setX(400);
+        HandGroup hand = new HandGroup();
+        CardActor card1 = new CardActor(player1.getCard1());
+        CardActor card2 = new CardActor(player1.getCard2());
+        hand.addActor(card1);
+        hand.addActor(card2);
+        stage.addActor(hand);
+        hand.setX(200);
+
+
     }
 
     /*
