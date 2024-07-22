@@ -16,34 +16,22 @@ import static konrad.poker.client.PokerGame.WINDOW_SIZE;
 public class GameScreen implements Screen {
 
 
-    private PokerService pokerService = new PokerService();
+    private Controller controller;
     private OrthographicCamera camera;
     private PokerGame pokerGame;
     private Stage stage;
 
+
     public GameScreen(PokerGame pokerGame) {
         this.pokerGame = pokerGame;
+        controller = new Controller(pokerGame);
         camera = new OrthographicCamera();
         camera.setToOrtho(false,WINDOW_SIZE,WINDOW_SIZE);
         stage = new Stage(new ScreenViewport(),pokerGame.getBatch());
 
-
-       Player player1 = pokerService.getPlayer();
-        System.out.println(player1); // jego dwie karty + ile ma kasy na start
-        MoneyActor moneyActor = new MoneyActor(player1,pokerGame.getFont());
-        HandGroup hand = new HandGroup();
-        CardActor card1 = new CardActor(player1.getCard1());
-        CardActor card2 = new CardActor(player1.getCard2());
-        hand.addActor(card1);
-        hand.addActor(card2);
-
-        PlayerGroup playerGroup = new PlayerGroup(hand,moneyActor);
-        stage.addActor(playerGroup);
-        playerGroup.setX(WINDOW_SIZE/2 - playerGroup.getWidth()/2);
-
-
-
-
+        PlayerGroup player = controller.createPlayer();
+        stage.addActor(player);
+        player.setX(WINDOW_SIZE/2f - player.getWidth()/2);
     }
 
     /*
