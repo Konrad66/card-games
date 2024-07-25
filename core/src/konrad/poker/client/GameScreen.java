@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import static konrad.poker.client.PokerGame.WINDOW_SIZE;
+import static konrad.poker.client.PokerGame.*;
 
 public class GameScreen implements Screen {
 
@@ -26,16 +26,31 @@ public class GameScreen implements Screen {
         stage = new Stage(new ScreenViewport(),pokerGame.getBatch());
 
         PlayerGroup player = controller.createPlayer();
+        DeckGroup deckGroup = new DeckGroup(controller);
+        stage.addActor(deckGroup);
         stage.addActor(player);
         player.setX(WINDOW_SIZE/2f - player.getWidth()/2);
+        player.setY(MARGIN);
+
+        System.out.println(WINDOW_SIZE);
+        deckGroup.setX(WINDOW_SIZE - CARD_WEIGHT - MARGIN);
+        deckGroup.setY(WINDOW_SIZE - CARD_HEIGHT - MARGIN);
     }
 
     /*
     * Pokazywanie ilosci kasy na liczniku
     * pokazywanie ręki z 2 kart
     * Polaczenie reki i licznika jako jeden element graficzny Gracza
+    * Zakryte karty
+    *
     * Dodanie stosu kart do dobierania
+    * Pobranie z backendu wybranej karty ze stosu
     * Animacja dobrania kart
+    * Przekazanie graczowi na rękę dobranych kart
+    * Wyświetlenie pozostałych graczy
+    * Rotacje?
+    * Rozdanie wszystkim graczom
+    * 3 karty na stół
     * */
 
     @Override

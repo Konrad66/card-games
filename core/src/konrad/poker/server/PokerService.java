@@ -33,4 +33,7 @@ public class PokerService {
     }
 
 
+    public Card getDeckCard(int i) {
+        return cardDeck.get(i);
+    }
 }

@@ -1,5 +1,6 @@
 package konrad.poker.client;
 
+import konrad.poker.server.Card;
 import konrad.poker.server.Player;
 import konrad.poker.server.PokerService;
 
@@ -26,4 +27,7 @@ public class Controller {
         return playerGroup;
     }
 
+    public Card getDeckCard(int i) {
+        return pokerService.getDeckCard(i);
+    }
 }
