@@ -4,11 +4,9 @@ import konrad.poker.client.Color;
 import konrad.poker.client.Rank;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static konrad.poker.server.CommandType.DRAW;
 
 public class PokerService {
 

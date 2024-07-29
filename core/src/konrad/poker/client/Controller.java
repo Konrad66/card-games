@@ -59,7 +59,7 @@ public class Controller {
     private void executeCommand(Command command) {
         switch (command.getType()) {
             case DRAW:
-                player.drawCards(command.getAmount());
+                deck.playerDraws(player,command.getAmount());
         }
     }
 
