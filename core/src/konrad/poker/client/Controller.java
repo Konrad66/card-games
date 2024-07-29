@@ -1,33 +1,86 @@
 package konrad.poker.client;
 
-import konrad.poker.server.Card;
-import konrad.poker.server.Player;
-import konrad.poker.server.PokerService;
+import konrad.poker.server.*;
 
-import static konrad.poker.client.PokerGame.WINDOW_SIZE;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
 
     private PokerService pokerService = new PokerService();
+    private PokerGameRules pokerGameRules = new PokerGameRules();
     private PokerGame pokerGame;
+    private DeckGroup deck;
+    private PlayerGroup player;
 
     public Controller(PokerGame pokerGame) {
         this.pokerGame = pokerGame;
     }
 
-     PlayerGroup createPlayer(){
-        Player player = pokerService.getPlayer();
-        MoneyActor moneyActor = new MoneyActor(player,pokerGame.getFont());
-        HandGroup hand = new HandGroup();
-        CardActor card1 = new CardActor(player.getCard1());
-        CardActor card2 = new CardActor(player.getCard2());
-        hand.addActor(card1);
-        hand.addActor(card2);
-        PlayerGroup playerGroup = new PlayerGroup(hand,moneyActor);
-        return playerGroup;
+     void setupActors() {
+        createPlayer();
+        createDeck();
     }
+
+    void createPlayer() {
+        Player player = pokerService.getPlayer();
+        MoneyActor moneyActor = new MoneyActor(player, pokerGame.getFont());
+        HandGroup hand = new HandGroup();
+        List<Card> cards = player.getPlayerCards();
+        List<CardActor> cardActors = new ArrayList<>();
+        for (Card card : cards) {
+            cardActors.add(new CardActor(card));
+        }
+        hand.addActors(cardActors);
+        this.player = new PlayerGroup(hand, moneyActor);
+    }
+
+    void createDeck() {
+         deck = new DeckGroup(this);
+    }
+
+
+    void startGame() {
+        List<Command> commands = pokerGameRules.getStartCommands();
+        for (Command command : commands) {
+            playCommand(command);
+        }
+        System.out.println(pokerService.getPlayer());
+    }
+
+    private void playCommand(Command command) {
+        boolean success = pokerService.executeCommand(command);
+        if (success) {
+            executeCommand(command);
+        }
+
+    }
+
+    private void executeCommand(Command command) {
+        switch (command.getType()) {
+            case DRAW:
+                player.drawCards(command.getAmount());
+        }
+    }
+
 
     public Card getDeckCard(int i) {
         return pokerService.getDeckCard(i);
+    }
+
+    public DeckGroup getDeck() {
+        return deck;
+    }
+
+    public PlayerGroup getPlayer() {
+        return player;
+    }
+
+    @Override
+    public String toString() {
+        return "Controller{" +
+                "player=" + player +
+                ", deck=" + deck +
+                '}';
     }
 }

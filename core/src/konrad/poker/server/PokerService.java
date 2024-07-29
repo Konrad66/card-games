@@ -4,14 +4,20 @@ import konrad.poker.client.Color;
 import konrad.poker.client.Rank;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
+import static konrad.poker.server.CommandType.DRAW;
 
 public class PokerService {
 
     private List<Card> cardDeck = new ArrayList<>();
+    private Player player = new Player(1000);
 
     public PokerService() {
         createCards();
+        shuffleDeck();
     }
 
     private void createCards() {
@@ -22,18 +28,35 @@ public class PokerService {
         }
     }
 
+    private void shuffleDeck(){
+        Collections.shuffle(cardDeck);
+    }
+
     public Card getCard() {
         return cardDeck.get(4);
     }
 
     public Player getPlayer(){
-        Card card = cardDeck.get(6);
-        card.setHidden(false);
-        return new Player(1000, card, cardDeck.get(50));
+        return player;
     }
 
 
     public Card getDeckCard(int i) {
         return cardDeck.get(i);
+    }
+
+    public boolean executeCommand(Command command){
+        switch (command.getType()){
+            case DRAW:
+                player.drawCard(cardDeck, command.getAmount());
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "PokerService{" +
+                "cardDeck=" + cardDeck +
+                '}';
     }
 }

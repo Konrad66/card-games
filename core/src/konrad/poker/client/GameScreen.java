@@ -20,13 +20,17 @@ public class GameScreen implements Screen {
 
     public GameScreen(PokerGame pokerGame) {
         this.pokerGame = pokerGame;
+        //zbudowanie okna i backendu
         controller = new Controller(pokerGame);
         camera = new OrthographicCamera();
         camera.setToOrtho(false,WINDOW_SIZE,WINDOW_SIZE);
         stage = new Stage(new ScreenViewport(),pokerGame.getBatch());
 
-        PlayerGroup player = controller.createPlayer();
-        DeckGroup deckGroup = new DeckGroup(controller);
+        controller.setupActors(); //tworzymy elementy gry
+
+        PlayerGroup player = controller.getPlayer();
+        DeckGroup deckGroup = controller.getDeck();
+
         stage.addActor(deckGroup);
         stage.addActor(player);
         player.setX(WINDOW_SIZE/2f - player.getWidth()/2);
@@ -35,6 +39,12 @@ public class GameScreen implements Screen {
         System.out.println(WINDOW_SIZE);
         deckGroup.setX(WINDOW_SIZE - CARD_WEIGHT - MARGIN);
         deckGroup.setY(WINDOW_SIZE - CARD_HEIGHT - MARGIN);
+
+        controller.startGame(); //rozpoczecie gry (rozdawanie itd
+
+
+        //rozgrywka
+
     }
 
     /*
@@ -42,9 +52,9 @@ public class GameScreen implements Screen {
     * pokazywanie ręki z 2 kart
     * Polaczenie reki i licznika jako jeden element graficzny Gracza
     * Zakryte karty
-    *
     * Dodanie stosu kart do dobierania
     * Pobranie z backendu wybranej karty ze stosu
+    *
     * Animacja dobrania kart
     * Przekazanie graczowi na rękę dobranych kart
     * Wyświetlenie pozostałych graczy
@@ -52,6 +62,8 @@ public class GameScreen implements Screen {
     * Rozdanie wszystkim graczom
     * 3 karty na stół
     * */
+
+    //
 
     @Override
     public void show() {

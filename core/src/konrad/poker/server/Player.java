@@ -1,36 +1,38 @@
 package konrad.poker.server;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
 
+    private List<Card> playerCards = new ArrayList<>();
     private int money;
-    private Card card1;
-    private Card card2;
 
-    public Player(int money, Card card1, Card card2) {
+    public Player(int money) {
         this.money = money;
-        this.card1 = card1;
-        this.card2 = card2;
     }
 
     public int getMoney() {
         return money;
     }
 
-    public Card getCard1() {
-        return card1;
+    public void drawCard(List<Card> cardsDeck, int amount) {
+        for (int i =0; i < amount; i++){
+            Card card = cardsDeck.get(0);
+            playerCards.add(card);
+            cardsDeck.remove(0);
+        }
     }
 
-    public Card getCard2() {
-        return card2;
+    public List<Card> getPlayerCards() {
+        return playerCards;
     }
-
 
     @Override
     public String toString() {
         return "Player{" +
                 "money=" + money +
-                ", card1=" + card1 +
-                ", card2=" + card2 +
+                ", playerCards=" + playerCards +
                 '}';
     }
 }
