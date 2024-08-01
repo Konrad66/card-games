@@ -29,6 +29,6 @@ public class MoneyActor extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
         font.setColor(Color.GREEN);
-        font.draw(batch,player.getMoney() + "",getX() + getWidth()/2 - 15,getHeight()/2 + 5); //todo dynamiczne wyliczanie
+        font.draw(batch,player.getMoney() + "",getX() + getWidth()/2 - 15,getHeight()/2 + 5 + getY()); //todo dynamiczne wyliczanie
     }
 }

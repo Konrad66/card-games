@@ -1,9 +1,11 @@
 package konrad.poker.client;
 
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import konrad.poker.server.Card;
-
-import java.util.List;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 public class PlayerGroup extends Group {
 
@@ -15,13 +17,53 @@ public class PlayerGroup extends Group {
         this.moneyActor = moneyActor;
         addActor(handGroup);
         addActor(moneyActor);
-        moneyActor.setX(handGroup.getWidth());
-        setWidth(handGroup.getWidth() + moneyActor.getWidth());
+        moneyActor.setX(handGroup.getWidth() + PokerGame.MARGIN);
+        updateWidth();
+        moneyActor.setY(PokerGame.MARGIN);
     }
 
-    void drawCards(int count){
-        System.out.println("Gracz dobiera " + count + "kart");
+
+
+
+    public void addCardWithAnimation(CardActor cardActor) {
+
+        Vector2 target = getNewCardPosition();
+        float targetX = target.x;
+        float targetY = target.y;
+
+        Action moveCard = Actions.moveTo(targetX, targetY, 1, Interpolation.fastSlow);
+        Action moveMoney = Actions.moveBy(cardActor.getWidth(),0,0.7f,Interpolation.fastSlow);
+
+        Action finshAnimation = new Action() { //todo anonimowe klasy
+            @Override
+            public boolean act(float delta) {
+                cardActor.setX(0);
+                cardActor.setY(0);
+                handGroup.addActor(cardActor);
+                updateWidth();
+                return true;
+            }
+        };
+
+        Action sequence = Actions.sequence( moveCard, finshAnimation);
+        cardActor.addAction(sequence);
+        moneyActor.addAction(moveMoney);
     }
 
+    private void updateWidth() {
+        setWidth(handGroup.getWidth() + moneyActor.getWidth() + PokerGame.MARGIN);
+    }
+
+    Vector2 getNewCardPosition() {
+        return handGroup.getNewCardPosition();
+    }
+
+    @Override
+    public void addActor(Actor actor) {
+        if (actor instanceof CardActor) {
+            throw new IllegalArgumentException("Don't add card directly to PlayerGroup. Add to HandGroup");
+        }
+        super.addActor(actor);
+    }
 
 }

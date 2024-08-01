@@ -1,6 +1,7 @@
 package konrad.poker.client;
 
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
@@ -19,5 +20,13 @@ public class HandGroup extends Group {
         for (CardActor cardActor : cardActors) {
             addActor(cardActor);
         }
+    }
+
+    Vector2 getNewCardPosition() {
+        return getStageVector().add(getWidth(), 0);
+    }
+
+    private Vector2 getStageVector() {
+        return localToStageCoordinates(new Vector2(getX(),getY()));
     }
 }

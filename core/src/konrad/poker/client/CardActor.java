@@ -3,9 +3,9 @@ package konrad.poker.client;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import konrad.poker.server.Card;
-import org.w3c.dom.Text;
 
 public class CardActor extends Actor {
 
@@ -47,6 +47,17 @@ public class CardActor extends Actor {
             texture = reversTexture;
         }
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
+    }
+
+    void leaveGroup() {
+        Vector2 stageVector = getStageVector();
+        setX(stageVector.x);
+        setY(stageVector.y);
+        getStage().addActor(this);
+    }
+
+   private Vector2 getStageVector() {
+        return localToStageCoordinates(new Vector2(getX(),getY()));
     }
 
 
