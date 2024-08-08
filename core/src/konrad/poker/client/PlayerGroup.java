@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 
 import java.util.List;
 
@@ -28,11 +29,33 @@ public class PlayerGroup extends Group {
 
 
     public void addCardWithAnimation(CardActor cardActor) {
-        Vector2 target = getNewCardPosition();
-        float targetX = target.x;
-        float targetY = target.y;
 
-        Action moveCard = Actions.moveTo(targetX, targetY, 1, Interpolation.fastSlow);
+
+
+
+
+       // Action moveCard = Actions.moveTo(targetX, targetY, 1, Interpolation.fastSlow);
+
+        MoveToAction moveCard = new MoveToAction(){
+            @Override
+            protected void begin() {
+                super.begin();
+                Vector2 target = getNewCardPosition();
+                float targetX = target.x;
+                float targetY = target.y;
+                setPosition(targetX, targetY);
+            }
+        };
+
+        moveCard.setDuration(1);
+        moveCard.setInterpolation(Interpolation.fastSlow);
+
+
+
+
+
+
+
         Action moveMoney = Actions.moveBy(cardActor.getWidth(),0,0.7f,Interpolation.fastSlow);
         moveMoney.setTarget(moneyActor);
 
