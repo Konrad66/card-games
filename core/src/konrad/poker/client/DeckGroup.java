@@ -1,5 +1,6 @@
 package konrad.poker.client;
 
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
 public class DeckGroup extends Group {
@@ -17,13 +18,16 @@ public class DeckGroup extends Group {
         addActor(secondCard);
         setWidth(PokerGame.CARD_WEIGHT);
         setHeight(PokerGame.CARD_HEIGHT);
-        //todo fadeIn - zaimplementowac pojawianie sie tali
+
+        
     }
 
 
     public void playerDraws(PlayerGroup player, int amount) {
         firstCard.leaveGroup();
         player.addCardWithAnimation(firstCard);
+        secondCard.leaveGroup();
+        player.addCardWithAnimation(secondCard);
         //todo poczytac u Ciebei jak to w kodzie wyglada (manager animacji)
     }
 }

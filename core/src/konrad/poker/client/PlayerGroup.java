@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
+import java.util.List;
+
 public class PlayerGroup extends Group {
 
    private HandGroup handGroup;
@@ -26,13 +28,13 @@ public class PlayerGroup extends Group {
 
 
     public void addCardWithAnimation(CardActor cardActor) {
-
         Vector2 target = getNewCardPosition();
         float targetX = target.x;
         float targetY = target.y;
 
         Action moveCard = Actions.moveTo(targetX, targetY, 1, Interpolation.fastSlow);
         Action moveMoney = Actions.moveBy(cardActor.getWidth(),0,0.7f,Interpolation.fastSlow);
+        moveMoney.setTarget(moneyActor);
 
         Action finshAnimation = new Action() { //todo anonimowe klasy
             @Override
@@ -46,8 +48,8 @@ public class PlayerGroup extends Group {
         };
 
         Action sequence = Actions.sequence( moveCard, finshAnimation);
-        cardActor.addAction(sequence);
-        moneyActor.addAction(moveMoney);
+        sequence.setTarget(cardActor);
+        ActionManager.getInstance().playActions(List.of(sequence,moveMoney));
     }
 
     private void updateWidth() {

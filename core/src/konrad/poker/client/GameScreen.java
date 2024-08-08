@@ -77,6 +77,7 @@ public class GameScreen implements Screen {
         pokerGame.getBatch().setProjectionMatrix(camera.combined);
         stage.act(delta); //aktorzy wykonują swoje akcje
         stage.draw(); //renderujemy aktora dla danej klatki
+        //todo debug
     }
 
     @Override
