@@ -54,9 +54,11 @@ public class GameScreen implements Screen {
     * Zakryte karty
     * Dodanie stosu kart do dobierania
     * Pobranie z backendu wybranej karty ze stosu
-    *
     * Animacja dobrania kart
     * Przekazanie graczowi na rękę dobranych kart
+    * manager animacji
+    * kolejne karty z decka
+    *
     * Wyświetlenie pozostałych graczy
     * Rotacje?
     * Rozdanie wszystkim graczom

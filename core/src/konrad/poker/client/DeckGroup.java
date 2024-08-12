@@ -1,33 +1,47 @@
 package konrad.poker.client;
 
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Group;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class DeckGroup extends Group {
 
     private Controller controller;
-    private CardActor firstCard;
-    private CardActor secondCard;
+    private Queue<CardActor> cards = new LinkedList<>();
+    private int drawn;
+
+    //todo różnica między linkedLista a ArrayLista
 
     public DeckGroup(Controller controller) {
         this.controller = controller;
-        firstCard = new CardActor(controller.getDeckCard(0));
-        secondCard = new CardActor(controller.getDeckCard(1));
-
-        addActor(firstCard);
-        addActor(secondCard);
+        addNextCard();
+        addNextCard();
         setWidth(PokerGame.CARD_WEIGHT);
         setHeight(PokerGame.CARD_HEIGHT);
-
-        
     }
 
 
     public void playerDraws(PlayerGroup player, int amount) {
-        firstCard.leaveGroup();
-        player.addCardWithAnimation(firstCard);
-        secondCard.leaveGroup();
-        player.addCardWithAnimation(secondCard);
-        //todo poczytac u Ciebei jak to w kodzie wyglada (manager animacji)
+        for (int i = 0; i < amount; i++) {
+            drawCard(player);
+        }
     }
+
+    private void drawCard(PlayerGroup player){
+        CardActor card = cards.remove();
+        card.leaveGroup();
+        player.addCardWithAnimation(card);
+        addNextCard();
+    }
+
+
+    private void addNextCard(){
+        CardActor cardActor = new CardActor(controller.getDeckCard(drawn++));
+        cards.add(cardActor);
+        addActor(cardActor);
+    }
+
+
+
 }

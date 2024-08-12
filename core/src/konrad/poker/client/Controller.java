@@ -53,13 +53,9 @@ public class Controller {
         if (success) {
             executeCommand(command);
         }
-
     }
 
     private void executeCommand(Command command) {
-
-
-
         switch (command.getType()) {
             case DRAW:
                 deck.playerDraws(player,command.getAmount());

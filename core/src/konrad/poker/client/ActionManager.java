@@ -77,9 +77,7 @@ public class ActionManager {
         private boolean isFinished() {
             return finishedActions == actions.size();
         }
-
     }
-
 
     //todo zmiana ze robimy jedna akcja
 }

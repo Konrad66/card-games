@@ -29,11 +29,6 @@ public class PlayerGroup extends Group {
 
 
     public void addCardWithAnimation(CardActor cardActor) {
-
-
-
-
-
        // Action moveCard = Actions.moveTo(targetX, targetY, 1, Interpolation.fastSlow);
 
         MoveToAction moveCard = new MoveToAction(){
@@ -49,12 +44,6 @@ public class PlayerGroup extends Group {
 
         moveCard.setDuration(1);
         moveCard.setInterpolation(Interpolation.fastSlow);
-
-
-
-
-
-
 
         Action moveMoney = Actions.moveBy(cardActor.getWidth(),0,0.7f,Interpolation.fastSlow);
         moveMoney.setTarget(moneyActor);
