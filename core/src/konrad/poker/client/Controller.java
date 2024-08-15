@@ -17,14 +17,14 @@ public class Controller {
         this.pokerGame = pokerGame;
     }
 
-     void setupActors() {
+    void setupActors() {
         createPlayer();
         createDeck();
     }
 
     void createPlayer() {
         Player player = pokerService.getPlayer();
-        MoneyActor moneyActor = new MoneyActor(player, pokerGame.getFont(),false);
+        MoneyActor moneyActor = new MoneyActor(player, pokerGame.getFont(), false);
         HandGroup hand = new HandGroup(NewCardDirection.LEFT);
         List<Card> cards = player.getPlayerCards();
         List<CardActor> cardActors = new ArrayList<>();
@@ -32,11 +32,11 @@ public class Controller {
             cardActors.add(new CardActor(card));
         }
         hand.addActors(cardActors);
-        this.player = new PlayerGroup(hand,moneyActor);
+        this.player = new PlayerGroup(hand, moneyActor);
     }
 
     void createDeck() {
-         deck = new DeckGroup(this);
+        deck = new DeckGroup(this);
     }
 
 
@@ -58,7 +58,7 @@ public class Controller {
     private void executeCommand(Command command) {
         switch (command.getType()) {
             case DRAW:
-                deck.playerDraws(player,command.getAmount());
+                deck.playerDraws(player, command.getAmount());
         }
     }
 
