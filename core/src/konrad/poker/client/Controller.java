@@ -24,15 +24,15 @@ public class Controller {
 
     void createPlayer() {
         Player player = pokerService.getPlayer();
-        MoneyActor moneyActor = new MoneyActor(player, pokerGame.getFont());
-        HandGroup hand = new HandGroup();
+        MoneyActor moneyActor = new MoneyActor(player, pokerGame.getFont(),false);
+        HandGroup hand = new HandGroup(NewCardDirection.LEFT);
         List<Card> cards = player.getPlayerCards();
         List<CardActor> cardActors = new ArrayList<>();
         for (Card card : cards) {
             cardActors.add(new CardActor(card));
         }
         hand.addActors(cardActors);
-        this.player = new PlayerGroup(hand, moneyActor);
+        this.player = new PlayerGroup(hand,moneyActor);
     }
 
     void createDeck() {

@@ -1,7 +1,6 @@
 package konrad.poker.client;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -21,6 +20,9 @@ public class DeckGroup extends Group {
         setHeight(PokerGame.CARD_HEIGHT);
     }
 
+    //todo wersja decka z lewej
+    //todo wersja decka z prawej
+    //todo 5 graczy
 
     public void playerDraws(PlayerGroup player, int amount) {
         for (int i = 0; i < amount; i++) {
@@ -35,13 +37,10 @@ public class DeckGroup extends Group {
         addNextCard();
     }
 
-
     private void addNextCard(){
         CardActor cardActor = new CardActor(controller.getDeckCard(drawn++));
         cards.add(cardActor);
         addActor(cardActor);
     }
-
-
 
 }

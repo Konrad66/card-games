@@ -8,30 +8,51 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class PlayerGroup extends Group {
 
-   private HandGroup handGroup;
-   private MoneyActor moneyActor;
+
+    private HandGroup handGroup;
+    /**
+     * Nullable
+     */
+    private MoneyActor moneyActor;
+    private int cardsAdded = 0;
 
     public PlayerGroup(HandGroup handGroup, MoneyActor moneyActor) {
-        this.handGroup = handGroup;
-        this.moneyActor = moneyActor;
-        addActor(handGroup);
-        addActor(moneyActor);
-        moneyActor.setX(handGroup.getWidth() + PokerGame.MARGIN);
+        setupHandGroup(handGroup);
+        setupMoneyActor(moneyActor);
         updateWidth();
+    }
+
+    public PlayerGroup(HandGroup handGroup) {
+        setupHandGroup(handGroup);
+        updateWidth();
+    }
+
+    private void setupHandGroup(HandGroup handGroup) {
+        this.handGroup = handGroup;
+        addActor(handGroup);
+    }
+
+    private void setupMoneyActor(MoneyActor moneyActor) {
+        this.moneyActor = moneyActor;
+        addActor(moneyActor);
         moneyActor.setY(PokerGame.MARGIN);
     }
 
-
+    //todo ułożenie kart na stole dac mozliwosc wylaczania licznika dla niektorych pozycji na potrzeby pozycji z prawej ukladanie kart w lewo;
+    //blokowanie przesuniecia licznika lub nie
+    //dokładanie kart w drugą stronę
 
 
     public void addCardWithAnimation(CardActor cardActor) {
-       // Action moveCard = Actions.moveTo(targetX, targetY, 1, Interpolation.fastSlow);
+        // Action moveCard = Actions.moveTo(targetX, targetY, 1, Interpolation.fastSlow);
 
-        MoveToAction moveCard = new MoveToAction(){
+        MoveToAction moveCard = new MoveToAction() {
             @Override
             protected void begin() {
                 super.begin();
@@ -45,8 +66,7 @@ public class PlayerGroup extends Group {
         moveCard.setDuration(1);
         moveCard.setInterpolation(Interpolation.fastSlow);
 
-        Action moveMoney = Actions.moveBy(cardActor.getWidth(),0,0.7f,Interpolation.fastSlow);
-        moveMoney.setTarget(moneyActor);
+
 
         Action finshAnimation = new Action() { //todo anonimowe klasy
             @Override
@@ -59,14 +79,25 @@ public class PlayerGroup extends Group {
             }
         };
 
-        Action sequence = Actions.sequence( moveCard, finshAnimation);
+        Action sequence = Actions.sequence(moveCard, finshAnimation);
         sequence.setTarget(cardActor);
-        ActionManager.getInstance().playActions(List.of(sequence,moveMoney));
+
+
+        List<Action> finalAnimation = new ArrayList<>();
+        finalAnimation.add(sequence);
+        if (moneyActor != null && (cardsAdded ==0 || moneyActor.movable())) {
+            Action moveMoney = Actions.moveBy( moneyActor.getMoveX(handGroup.getDirection()), 0, 0.7f, Interpolation.fastSlow);
+            moveMoney.setTarget(moneyActor);
+            finalAnimation.add(moveMoney);
+        }
+        ActionManager.getInstance().playActions(finalAnimation);
+        cardsAdded++;
     }
 
     private void updateWidth() {
-        setWidth(handGroup.getWidth() + moneyActor.getWidth() + PokerGame.MARGIN);
+        setWidth(handGroup.getWidth() +  (moneyActor != null ? moneyActor.getWidth() : 0) + PokerGame.MARGIN);
     }
+
 
     Vector2 getNewCardPosition() {
         return handGroup.getNewCardPosition();

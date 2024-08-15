@@ -16,19 +16,33 @@ public class MoneyActor extends Actor {
     private Player player;
     private GlyphLayout glyphLayout = new GlyphLayout();
     private BitmapFont font;
+    private boolean movable;
+    private float size = 100;
 
-    public MoneyActor(Player player, BitmapFont font) {
-             this.player = player;
-             this.font = font;
-             texture = new Texture( Gdx.files.internal("token/token.png"));
-             setWidth(100);
-             setHeight(100);
+    public MoneyActor(Player player, BitmapFont font, boolean movable) {
+        this.player = player;
+        this.font = font;
+        this.movable = movable;
+        texture = new Texture(Gdx.files.internal("token/token.png"));
+        setX(-size/8);
+        setWidth(size);
+        setHeight(size);
+
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
         font.setColor(Color.GREEN);
-        font.draw(batch,player.getMoney() + "",getX() + getWidth()/2 - 15,getHeight()/2 + 5 + getY()); //todo dynamiczne wyliczanie
+        font.draw(batch, player.getMoney() + "", getX() + getWidth() / 2 - 15, getHeight() / 2 + 5 + getY()); //todo dynamiczne wyliczanie
+    }
+
+    public boolean movable() {
+        return movable;
+    }
+
+    public float getMoveX(NewCardDirection direction) {
+        float move = PokerGame.CARD_WEIGHT + PokerGame.MARGIN;
+        return direction == NewCardDirection.RIGHT ? -move : move;
     }
 }
