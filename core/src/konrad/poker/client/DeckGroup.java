@@ -1,27 +1,38 @@
 package konrad.poker.client;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import konrad.poker.server.Card;
+
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 
 public class DeckGroup extends Group {
 
     private Controller controller;
-    private Queue<CardActor> cards = new LinkedList<>();
-    private int drawn;
+    private Deque<CardActor> cards = new LinkedList<>();
 
     //todo różnica między linkedLista a ArrayLista
 
     public DeckGroup(Controller controller) {
         this.controller = controller;
-        addNextCard();
-        addNextCard();
         setWidth(PokerGame.CARD_WEIGHT);
         setHeight(PokerGame.CARD_HEIGHT);
+        addAllCards();
     }
 
+    private void addAllCards(){
+        List<Card> deckCards = controller.getDeckCards();
+        System.out.println(deckCards);
+        for (int i = deckCards.size() - 1; i >= 0; i--) {
+            CardActor cardActor = new CardActor(deckCards.get(i));
+            cards.add(cardActor);
+            addActor(cardActor);
+        }
+    }
     //todo wersja decka z lewej
     //todo wersja decka z prawej
+
     //todo 5 graczy
 
     public void playerDraws(PlayerGroup player, int amount) {
@@ -31,16 +42,9 @@ public class DeckGroup extends Group {
     }
 
     private void drawCard(PlayerGroup player){
-        CardActor card = cards.remove();
+        CardActor card = cards.removeLast();
         card.leaveGroup();
         player.addCardWithAnimation(card);
-        addNextCard();
-    }
 
-    private void addNextCard(){
-        CardActor cardActor = new CardActor(controller.getDeckCard(drawn++));
-        cards.add(cardActor);
-        addActor(cardActor);
     }
-
 }

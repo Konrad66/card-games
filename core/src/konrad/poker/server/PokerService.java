@@ -57,4 +57,8 @@ public class PokerService {
                 "cardDeck=" + cardDeck +
                 '}';
     }
+
+    public List<Card> getDeckCards() {
+        return cardDeck;
+    }
 }

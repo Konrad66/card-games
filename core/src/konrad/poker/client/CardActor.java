@@ -15,6 +15,7 @@ public class CardActor extends Actor {
     private Card card;
     private Texture aversTexture;
     private Texture reversTexture;
+    private boolean hidden = false;
 
 
     public CardActor(Card card) {
@@ -43,7 +44,7 @@ public class CardActor extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         Texture texture = aversTexture;
-        if (card.isHidden()) {
+        if (hidden) {
             texture = reversTexture;
         }
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
@@ -60,6 +61,9 @@ public class CardActor extends Actor {
         return localToStageCoordinates(new Vector2(getX(),getY()));
     }
 
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
 
-    // 2 
+    // 2
 }

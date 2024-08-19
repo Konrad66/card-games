@@ -56,10 +56,12 @@ public class PlayerGroup extends Group {
             @Override
             protected void begin() {
                 super.begin();
+                cardActor.setHidden(false);
                 Vector2 target = getNewCardPosition();
                 float targetX = target.x;
                 float targetY = target.y;
                 setPosition(targetX, targetY);
+
             }
         };
 
@@ -68,7 +70,7 @@ public class PlayerGroup extends Group {
 
 
 
-        Action finshAnimation = new Action() { //todo anonimowe klasy
+        Action finishAnimation = new Action() { //todo anonimowe klasy
             @Override
             public boolean act(float delta) {
                 cardActor.setX(0);
@@ -79,7 +81,7 @@ public class PlayerGroup extends Group {
             }
         };
 
-        Action sequence = Actions.sequence(moveCard, finshAnimation);
+        Action sequence = Actions.sequence(moveCard, finishAnimation);
         sequence.setTarget(cardActor);
 
 

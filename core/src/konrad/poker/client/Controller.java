@@ -45,7 +45,6 @@ public class Controller {
         for (Command command : commands) {
             playCommand(command);
         }
-        System.out.println(pokerService.getPlayer());
     }
 
     private void playCommand(Command command) {
@@ -63,8 +62,8 @@ public class Controller {
     }
 
 
-    public Card getDeckCard(int i) {
-        return pokerService.getDeckCard(i);
+    public List<Card> getDeckCards() {
+        return pokerService.getDeckCards();
     }
 
     public DeckGroup getDeck() {

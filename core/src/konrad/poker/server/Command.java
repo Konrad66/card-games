@@ -5,6 +5,7 @@ public class Command {
     private CommandType type;
     private int amount;
 
+
     public Command(CommandType type, int amount) {
         this.type = type;
         this.amount = amount;
