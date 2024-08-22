@@ -12,16 +12,16 @@ import java.util.List;
 public class HandGroup extends Group {
 
 
-    private NewCardDirection direction;
+    private Direction direction;
 
-    public HandGroup(NewCardDirection direction) {
+    public HandGroup(Direction direction) {
         this.direction = direction;
     }
 
     @Override
     public void addActor(Actor actor) {
         actor.setX(getNewCardX());
-        if (direction == NewCardDirection.RIGHT) {
+        if (direction == Direction.RIGHT) {
             setWidth(getWidth() + actor.getWidth());
         }
         super.addActor(actor);
@@ -39,7 +39,7 @@ public class HandGroup extends Group {
 
     private float getNewCardX() {
         float x = PokerGame.CARD_WEIGHT * getChildren().size;
-        return direction == NewCardDirection.RIGHT ? x : -x;
+        return direction == Direction.RIGHT ? x : -x;
     }
 
 
@@ -47,7 +47,7 @@ public class HandGroup extends Group {
         return localToStageCoordinates(new Vector2(getX(),getY()));
     }
 
-    public NewCardDirection getDirection() {
+    public Direction getDirection() {
         return direction;
     }
 }

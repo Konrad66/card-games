@@ -11,11 +11,13 @@ import java.util.List;
 public class PokerService {
 
     private List<Card> cardDeck = new ArrayList<>();
-    private Player player = new Player(1000);
+    private List<Player> players = new ArrayList<>();
+    private static final int NUMBER_OF_PLAYERS = 2;
 
     public PokerService() {
         createCards();
         shuffleDeck();
+        createPlayers();
     }
 
     private void createCards() {
@@ -26,27 +28,33 @@ public class PokerService {
         }
     }
 
-    private void shuffleDeck(){
+    private void shuffleDeck() {
         Collections.shuffle(cardDeck);
+    }
+
+    private void createPlayers() {
+        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            Player player = new Player(1000, i + 1);
+            players.add(player);
+        }
     }
 
     public Card getCard() {
         return cardDeck.get(4);
     }
 
-    public Player getPlayer(){
-        return player;
+    public List<Player> getPlayers() {
+        return players;
     }
-
 
     public Card getDeckCard(int i) {
         return cardDeck.get(i);
     }
 
-    public boolean executeCommand(Command command){
-        switch (command.getType()){
+    public boolean executeCommand(Command command) {
+        switch (command.getType()) {
             case DRAW:
-                player.drawCard(cardDeck, command.getAmount());
+                players.get(0).drawCard(cardDeck, command.getAmount()); //todo dynamiczne wybieranie playera po id
         }
         return true;
     }

@@ -28,17 +28,15 @@ public class PlayerGroup extends Group {
         updateWidth();
     }
 
-    public PlayerGroup(HandGroup handGroup) {
-        setupHandGroup(handGroup);
-        updateWidth();
-    }
-
     private void setupHandGroup(HandGroup handGroup) {
         this.handGroup = handGroup;
         addActor(handGroup);
     }
 
     private void setupMoneyActor(MoneyActor moneyActor) {
+        if (moneyActor == null) {
+            return;
+        }
         this.moneyActor = moneyActor;
         addActor(moneyActor);
         moneyActor.setY(PokerGame.MARGIN);
@@ -87,7 +85,7 @@ public class PlayerGroup extends Group {
         List<Action> finalAnimation = new ArrayList<>();
         finalAnimation.add(sequence);
         if (moneyActor != null && (cardsAdded ==0 || moneyActor.movable())) {
-            Action moveMoney = Actions.moveBy( moneyActor.getMoveX(handGroup.getDirection()), 0, 0.7f, Interpolation.fastSlow);
+            Action moveMoney = Actions.moveBy( moneyActor.getMoveX(), 0, 0.7f, Interpolation.fastSlow);
             moveMoney.setTarget(moneyActor);
             finalAnimation.add(moveMoney);
         }

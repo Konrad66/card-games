@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import java.util.Map;
+
 import static konrad.poker.client.PokerGame.*;
 
 public class GameScreen implements Screen {
@@ -23,18 +25,20 @@ public class GameScreen implements Screen {
         //zbudowanie okna i backendu
         controller = new Controller(pokerGame);
         camera = new OrthographicCamera();
-        camera.setToOrtho(false,WINDOW_SIZE,WINDOW_SIZE);
-        stage = new Stage(new ScreenViewport(),pokerGame.getBatch());
+        camera.setToOrtho(false, WINDOW_SIZE, WINDOW_SIZE);
+        stage = new Stage(new ScreenViewport(), pokerGame.getBatch());
 
         controller.setupActors(); //tworzymy elementy gry
 
-        PlayerGroup player = controller.getPlayer();
+        //todo nieintuicyjne
+        Map<Integer, PlayerGroup> players = controller.getPlayers();
+        for (PlayerGroup player : players.values()) {
+            stage.addActor(player);
+            //todo zaktualizować
+        }
         DeckGroup deckGroup = controller.getDeck();
-
         stage.addActor(deckGroup);
-        stage.addActor(player);
-        player.setX(WINDOW_SIZE/2f - player.getWidth()/2);
-        player.setY(MARGIN);
+
 
         System.out.println(WINDOW_SIZE);
         deckGroup.setX(WINDOW_SIZE - CARD_WEIGHT - MARGIN);
@@ -48,22 +52,22 @@ public class GameScreen implements Screen {
     }
 
     /*
-    * Pokazywanie ilosci kasy na liczniku
-    * pokazywanie ręki z 2 kart
-    * Polaczenie reki i licznika jako jeden element graficzny Gracza
-    * Zakryte karty
-    * Dodanie stosu kart do dobierania
-    * Pobranie z backendu wybranej karty ze stosu
-    * Animacja dobrania kart
-    * Przekazanie graczowi na rękę dobranych kart
-    * manager animacji
-    * kolejne karty z decka
-    *
-    * Wyświetlenie pozostałych graczy
-    * Rotacje?
-    * Rozdanie wszystkim graczom
-    * 3 karty na stół
-    * */
+     * Pokazywanie ilosci kasy na liczniku
+     * pokazywanie ręki z 2 kart
+     * Polaczenie reki i licznika jako jeden element graficzny Gracza
+     * Zakryte karty
+     * Dodanie stosu kart do dobierania
+     * Pobranie z backendu wybranej karty ze stosu
+     * Animacja dobrania kart
+     * Przekazanie graczowi na rękę dobranych kart
+     * manager animacji
+     * kolejne karty z decka
+     *
+     * Wyświetlenie pozostałych graczy
+     * Rotacje?
+     * Rozdanie wszystkim graczom
+     * 3 karty na stół
+     * */
 
     //
 

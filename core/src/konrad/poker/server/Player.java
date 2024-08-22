@@ -7,13 +7,19 @@ public class Player {
 
     private List<Card> playerCards = new ArrayList<>();
     private int money;
+    private int id;
 
-    public Player(int money) {
+    public Player(int money, int id) {
         this.money = money;
+        this.id = id;
     }
 
     public int getMoney() {
         return money;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void drawCard(List<Card> cardsDeck, int amount) {
@@ -31,8 +37,9 @@ public class Player {
     @Override
     public String toString() {
         return "Player{" +
-                "money=" + money +
-                ", playerCards=" + playerCards +
+                "playerCards=" + playerCards +
+                ", money=" + money +
+                ", id=" + id +
                 '}';
     }
 }

@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import konrad.poker.server.Player;
-import org.w3c.dom.Text;
 
 public class MoneyActor extends Actor {
 
@@ -18,11 +17,14 @@ public class MoneyActor extends Actor {
     private BitmapFont font;
     private boolean movable;
     private float size = 100;
+    private Direction direction;
 
-    public MoneyActor(Player player, BitmapFont font, boolean movable) {
+
+    public MoneyActor(Player player, BitmapFont font, boolean movable, Direction direction) {
         this.player = player;
         this.font = font;
         this.movable = movable;
+        this.direction = direction;
         texture = new Texture(Gdx.files.internal("token/token.png"));
         setX(-size/8);
         setWidth(size);
@@ -41,8 +43,8 @@ public class MoneyActor extends Actor {
         return movable;
     }
 
-    public float getMoveX(NewCardDirection direction) {
+    public float getMoveX() {
         float move = PokerGame.CARD_WEIGHT + PokerGame.MARGIN;
-        return direction == NewCardDirection.RIGHT ? -move : move;
+        return direction == Direction.RIGHT ? -move : move;
     }
 }

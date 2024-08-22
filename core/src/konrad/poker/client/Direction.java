@@ -1,5 +1,5 @@
 package konrad.poker.client;
 
-public enum NewCardDirection {
+public enum Direction {
     LEFT, RIGHT
 }

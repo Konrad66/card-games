@@ -2,8 +2,9 @@ package konrad.poker.client;
 
 import konrad.poker.server.*;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Controller {
 
@@ -11,7 +12,7 @@ public class Controller {
     private PokerGameRules pokerGameRules = new PokerGameRules();
     private PokerGame pokerGame;
     private DeckGroup deck;
-    private PlayerGroup player;
+    private Map<Integer,PlayerGroup> players = new HashMap<>();
 
     public Controller(PokerGame pokerGame) {
         this.pokerGame = pokerGame;
@@ -23,16 +24,21 @@ public class Controller {
     }
 
     void createPlayer() {
-        Player player = pokerService.getPlayer();
-        MoneyActor moneyActor = new MoneyActor(player, pokerGame.getFont(), false);
-        HandGroup hand = new HandGroup(NewCardDirection.LEFT);
-        List<Card> cards = player.getPlayerCards();
-        List<CardActor> cardActors = new ArrayList<>();
-        for (Card card : cards) {
-            cardActors.add(new CardActor(card));
+        List<Player> playersList = pokerService.getPlayers();
+        PokerGameLayout layout = new PokerGameLayout();
+        for (Player player : playersList) {
+            PokerGameLayout.PlayerLayout playerLayout = layout.getLayoutFor(player.getId());
+            MoneyActor moneyActor = null;
+            if (playerLayout.isWithMoney()) {
+                moneyActor = new MoneyActor(player, pokerGame.getFont(), playerLayout.isMovable(),playerLayout.getMoneyDirection());
+            }
+            HandGroup hand = new HandGroup(playerLayout.getHandDirection());
+            PlayerGroup playerGroup = new PlayerGroup(hand, moneyActor);
+            playerGroup.setX(playerLayout.getX());
+            playerGroup.setY(playerLayout.getY());
+            players.put(player.getId(), playerGroup);
+
         }
-        hand.addActors(cardActors);
-        this.player = new PlayerGroup(hand, moneyActor);
     }
 
     void createDeck() {
@@ -57,7 +63,7 @@ public class Controller {
     private void executeCommand(Command command) {
         switch (command.getType()) {
             case DRAW:
-                deck.playerDraws(player, command.getAmount());
+                deck.playerDraws(players.get(1), command.getAmount());
         }
     }
 
@@ -70,14 +76,14 @@ public class Controller {
         return deck;
     }
 
-    public PlayerGroup getPlayer() {
-        return player;
+    public Map<Integer, PlayerGroup> getPlayers() {
+        return players;
     }
 
     @Override
     public String toString() {
         return "Controller{" +
-                "player=" + player +
+                "player=" + players +
                 ", deck=" + deck +
                 '}';
     }
