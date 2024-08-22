@@ -50,12 +50,11 @@ public class PlayerGroup extends Group {
 
 
     public void addCardWithAnimation(CardActor cardActor) {
-        // Action moveCard = Actions.moveTo(targetX, targetY, 1, Interpolation.fastSlow);
-
         MoveToAction moveCard = new MoveToAction() {
             @Override
             protected void begin() {
-                super.begin();
+                cardActor.leaveGroup(); //startowa pozycja karty przed animacją
+                super.begin(); //zaczytanie pozycji karty do animacji
                 cardActor.setHidden(false);
                 Vector2 target = getNewCardPosition();
                 float targetX = target.x;
@@ -66,7 +65,7 @@ public class PlayerGroup extends Group {
         };
 
         moveCard.setDuration(1);
-        moveCard.setInterpolation(Interpolation.fastSlow);
+        moveCard.setInterpolation(Interpolation.exp10);
 
 
 

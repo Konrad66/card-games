@@ -30,10 +30,6 @@ public class DeckGroup extends Group {
             addActor(cardActor);
         }
     }
-    //todo wersja decka z lewej
-    //todo wersja decka z prawej
-
-    //todo 5 graczy
 
     public void playerDraws(PlayerGroup player, int amount) {
         for (int i = 0; i < amount; i++) {
@@ -43,7 +39,6 @@ public class DeckGroup extends Group {
 
     private void drawCard(PlayerGroup player){
         CardActor card = cards.removeLast();
-        card.leaveGroup();
         player.addCardWithAnimation(card);
 
     }

@@ -12,14 +12,12 @@ public class CardActor extends Actor {
     private static final String CARDS_PATH = "cards/";
     private static final String REVERS_PATH = CARDS_PATH + "card_back/cardBackBlue.png";
 
-    private Card card;
     private Texture aversTexture;
     private Texture reversTexture;
-    private boolean hidden = false;
+    private boolean hidden = true;
 
 
     public CardActor(Card card) {
-        this.card = card;
         String path = filesPath(card);
         aversTexture = new Texture(Gdx.files.internal(path));
         reversTexture = new Texture(Gdx.files.internal(REVERS_PATH));
