@@ -63,7 +63,7 @@ public class Controller {
     private void executeCommand(Command command) {
         switch (command.getType()) {
             case DRAW:
-                deck.playerDraws(players.get(1), command.getAmount());
+                deck.playerDraws(players.get(command.getPlayerId()), command.getAmount());
         }
     }
 

@@ -12,7 +12,8 @@ public class PokerService {
 
     private List<Card> cardDeck = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
-    private static final int NUMBER_OF_PLAYERS = 2;
+    private PokerGameRules pokerGameRules = new PokerGameRules();
+
 
     public PokerService() {
         createCards();
@@ -33,8 +34,9 @@ public class PokerService {
     }
 
     private void createPlayers() {
-        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            Player player = new Player(1000, i + 1);
+        List<Integer> playersId = pokerGameRules.getPlayers();
+        for (Integer id : playersId) {
+            Player player = new Player(1000, id);
             players.add(player);
         }
     }
