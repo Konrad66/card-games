@@ -6,7 +6,7 @@ import java.util.List;
 public class PokerGameRules {
 
     private List<Integer> players = new ArrayList<>();
-    private static final int NUMBER_OF_PLAYERS = 2;
+    private static final int NUMBER_OF_PLAYERS = 5;
 
     public PokerGameRules() {
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {

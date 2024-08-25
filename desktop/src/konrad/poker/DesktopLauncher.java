@@ -10,7 +10,9 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("poker");
-		config.setWindowedMode(800,800);
+		//720p (HD): 1280 x 720 pikseli
+		config.setWindowedMode(PokerGame.WINDOW_WIDTH ,PokerGame.WINDOW_HEIGHT );
+		//1080p (Full HD): 1920 x 1080 pikseli
 		new Lwjgl3Application(new PokerGame(), config);
 	}
 }

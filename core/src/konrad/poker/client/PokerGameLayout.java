@@ -4,26 +4,46 @@ import static konrad.poker.client.PokerGame.*;
 
 public class PokerGameLayout {
 
-
-    PlayerLayout getLayoutFor(int position){
+    PlayerLayout getLayoutFor(int position) {
         PlayerLayout playerLayout = new PlayerLayout();
-        playerLayout.withCounter = true;
-        switch (position){
+        playerLayout.withMoney = true;
+        switch (position) {
             case 1:
-                playerLayout.x= WINDOW_SIZE / 2 - CARD_WEIGHT / 2;
+                playerLayout.x = WINDOW_WIDTH / 3;
                 playerLayout.y = MARGIN;
                 playerLayout.movable = true;
                 playerLayout.handDirection = Direction.RIGHT;
+                playerLayout.moneyDirection = Direction.RIGHT;
                 break;
             case 2:
-                playerLayout.x = MARGIN;
-                playerLayout.y = WINDOW_SIZE / 2;
+                playerLayout.x = MARGIN * 2 + CARD_WEIGHT;
+                playerLayout.y = WINDOW_HEIGHT / 3;
                 playerLayout.movable = false;
                 playerLayout.handDirection = Direction.RIGHT;
+                playerLayout.moneyDirection = Direction.LEFT;
+                break;
+            case 3:
+                playerLayout.x = MARGIN * 2 + CARD_WEIGHT;
+                playerLayout.y = WINDOW_HEIGHT / 2;
+                playerLayout.movable = false;
+                playerLayout.handDirection = Direction.RIGHT;
+                playerLayout.moneyDirection = Direction.LEFT;
+                break;
+            case 4:
+                playerLayout.x = WINDOW_WIDTH - 300;
+                playerLayout.y = WINDOW_HEIGHT / 2;
+                playerLayout.movable = true;
+                playerLayout.handDirection = Direction.RIGHT;
+                playerLayout.moneyDirection = Direction.RIGHT;
+                break;
+            case 5:
+                playerLayout.x = WINDOW_WIDTH - 300;
+                playerLayout.y = WINDOW_HEIGHT / 3;
+                playerLayout.movable = true;
+                playerLayout.handDirection = Direction.RIGHT;
+                playerLayout.moneyDirection = Direction.RIGHT;
                 break;
         }
-
-
 
         if (position <= 0 || position > 5) {
             throw new IllegalArgumentException("Valid positions: 1-5");
@@ -31,14 +51,13 @@ public class PokerGameLayout {
         return playerLayout;
     }
 
-    class PlayerLayout{
+    class PlayerLayout {
         private int x;
         private int y;
         private boolean movable;
         private Direction handDirection;
         private Direction moneyDirection;
-
-        private boolean withCounter;
+        private boolean withMoney;
 
         public PlayerLayout() {
 
@@ -61,12 +80,11 @@ public class PokerGameLayout {
         }
 
         public boolean isWithMoney() {
-            return withCounter;
+            return withMoney;
         }
 
         public Direction getMoneyDirection() {
             return moneyDirection;
         }
     }
-
 }

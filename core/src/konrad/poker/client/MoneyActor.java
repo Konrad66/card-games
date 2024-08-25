@@ -45,6 +45,6 @@ public class MoneyActor extends Actor {
 
     public float getMoveX() {
         float move = PokerGame.CARD_WEIGHT + PokerGame.MARGIN;
-        return direction == Direction.RIGHT ? -move : move;
+        return direction == Direction.RIGHT ? move : -move;
     }
 }
