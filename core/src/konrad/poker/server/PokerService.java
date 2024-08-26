@@ -34,9 +34,14 @@ public class PokerService {
     }
 
     private void createPlayers() {
-        List<Integer> playersId = pokerGameRules.getPlayers();
-        for (Integer id : playersId) {
-            Player player = new Player(1000, id);
+        List<PlayerScheme> playerSchemes = pokerGameRules.getPlayers();
+        for (PlayerScheme playerScheme : playerSchemes) {
+            Player player;
+            if (playerScheme.getPlayerType().equals(PlayerType.HUMAN)) {
+                player = new Player(1000, playerScheme.getId());
+            } else {
+                player = new Dealer(playerScheme.getId());
+            }
             players.add(player);
         }
     }
@@ -72,3 +77,5 @@ public class PokerService {
         return cardDeck;
     }
 }
+
+//todo zastanowic sie jak widzimy karty innego gracza
