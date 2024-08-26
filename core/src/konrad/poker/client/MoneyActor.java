@@ -16,7 +16,6 @@ public class MoneyActor extends Actor {
     private GlyphLayout glyphLayout = new GlyphLayout();
     private BitmapFont font;
     private boolean movable;
-    private float size = 100;
     private Direction direction;
 
 
@@ -26,9 +25,9 @@ public class MoneyActor extends Actor {
         this.movable = movable;
         this.direction = direction;
         texture = new Texture(Gdx.files.internal("token/token.png"));
-        setX(-size/8);
-        setWidth(size);
-        setHeight(size);
+        setX(-Dimensions.MONEY_SIZE/8);
+        setWidth(Dimensions.MONEY_SIZE);
+        setHeight(Dimensions.MONEY_SIZE);
 
     }
 
@@ -44,7 +43,7 @@ public class MoneyActor extends Actor {
     }
 
     public float getMoveX() {
-        float move = PokerGame.CARD_WEIGHT + PokerGame.MARGIN;
+        float move = Dimensions.CARD_WEIGHT + Dimensions.MARGIN;
         return direction == Direction.RIGHT ? move : -move;
     }
 }

@@ -1,46 +1,45 @@
 package konrad.poker.client;
 
-import static konrad.poker.client.PokerGame.*;
-
 public class PokerGameLayout {
 
     PlayerLayout getLayoutFor(int position) {
         PlayerLayout playerLayout = new PlayerLayout();
         playerLayout.withMoney = true;
+        int leftMargin = Dimensions.MARGIN + Dimensions.MONEY_SIZE;
+        int rightMargin = Dimensions.WINDOW_WIDTH - leftMargin - Dimensions.MONEY_SIZE;
+        int yDown =  Dimensions.WINDOW_HEIGHT / 3;
+        int yUp = Dimensions.WINDOW_HEIGHT / 2 + Dimensions.MARGIN;
+
         switch (position) {
             case 1:
-                playerLayout.x = WINDOW_WIDTH / 3;
-                playerLayout.y = MARGIN;
+                playerLayout.x = Dimensions.WINDOW_WIDTH / 3;
+                playerLayout.y = Dimensions.MARGIN;
                 playerLayout.movable = true;
                 playerLayout.handDirection = Direction.RIGHT;
                 playerLayout.moneyDirection = Direction.RIGHT;
                 break;
-            case 2:
-                playerLayout.x = MARGIN * 2 + CARD_WEIGHT;
-                playerLayout.y = WINDOW_HEIGHT / 3;
-                playerLayout.movable = false;
+            case 2: //lewy dół
+                playerLayout.x =leftMargin;
+                playerLayout.y = yDown;
                 playerLayout.handDirection = Direction.RIGHT;
                 playerLayout.moneyDirection = Direction.LEFT;
                 break;
-            case 3:
-                playerLayout.x = MARGIN * 2 + CARD_WEIGHT;
-                playerLayout.y = WINDOW_HEIGHT / 2;
-                playerLayout.movable = false;
+            case 3: // lewa góra
+                playerLayout.x =leftMargin;
+                playerLayout.y = yUp;
                 playerLayout.handDirection = Direction.RIGHT;
                 playerLayout.moneyDirection = Direction.LEFT;
                 break;
-            case 4:
-                playerLayout.x = WINDOW_WIDTH - 300;
-                playerLayout.y = WINDOW_HEIGHT / 2;
-                playerLayout.movable = true;
-                playerLayout.handDirection = Direction.RIGHT;
+            case 4: //prawy dół
+                playerLayout.x = rightMargin;
+                playerLayout.y = yDown;
+                playerLayout.handDirection = Direction.LEFT;
                 playerLayout.moneyDirection = Direction.RIGHT;
                 break;
-            case 5:
-                playerLayout.x = WINDOW_WIDTH - 300;
-                playerLayout.y = WINDOW_HEIGHT / 3;
-                playerLayout.movable = true;
-                playerLayout.handDirection = Direction.RIGHT;
+            case 5: // prawa góra
+                playerLayout.x = rightMargin;
+                playerLayout.y = yUp ;
+                playerLayout.handDirection = Direction.LEFT;
                 playerLayout.moneyDirection = Direction.RIGHT;
                 break;
         }

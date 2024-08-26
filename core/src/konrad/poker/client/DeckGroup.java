@@ -16,8 +16,8 @@ public class DeckGroup extends Group {
 
     public DeckGroup(Controller controller) {
         this.controller = controller;
-        setWidth(PokerGame.CARD_WEIGHT);
-        setHeight(PokerGame.CARD_HEIGHT);
+        setWidth(Dimensions.CARD_WEIGHT);
+        setHeight(Dimensions.CARD_HEIGHT);
         addAllCards();
     }
 
@@ -42,4 +42,6 @@ public class DeckGroup extends Group {
         player.addCardWithAnimation(card);
 
     }
+
+    //todo prośba jeszcze raz wytłumaczyć this
 }

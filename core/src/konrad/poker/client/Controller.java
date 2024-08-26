@@ -37,7 +37,6 @@ public class Controller {
             playerGroup.setX(playerLayout.getX());
             playerGroup.setY(playerLayout.getY());
             players.put(player.getId(), playerGroup);
-
         }
     }
 

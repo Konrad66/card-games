@@ -22,7 +22,7 @@ public class HandGroup extends Group {
     public void addActor(Actor actor) {
         actor.setX(getNewCardX());
         if (direction == Direction.RIGHT) {
-            setWidth(getWidth() + actor.getWidth());
+            setWidth(getWidth() + actor.getWidth() + Dimensions.MARGIN);
         }
         super.addActor(actor);
     }
@@ -38,7 +38,7 @@ public class HandGroup extends Group {
     }
 
     private float getNewCardX() {
-        float x = PokerGame.CARD_WEIGHT * getChildren().size;
+        float x = Dimensions.CARD_WEIGHT  * getChildren().size + Dimensions.MARGIN/2f * getChildren().size;
         return direction == Direction.RIGHT ? x : -x;
     }
 

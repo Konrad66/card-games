@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class PlayerGroup extends Group {
 
@@ -39,7 +38,7 @@ public class PlayerGroup extends Group {
         }
         this.moneyActor = moneyActor;
         addActor(moneyActor);
-        moneyActor.setY(PokerGame.MARGIN);
+        moneyActor.setY(Dimensions.MARGIN);
     }
 
     //todo ułożenie kart na stole dac mozliwosc wylaczania licznika dla niektorych pozycji na potrzeby pozycji z prawej ukladanie kart w lewo;
@@ -94,7 +93,7 @@ public class PlayerGroup extends Group {
     }
 
     private void updateWidth() {
-        setWidth(handGroup.getWidth() +  (moneyActor != null ? moneyActor.getWidth() : 0) + PokerGame.MARGIN);
+        setWidth(handGroup.getWidth() +  (moneyActor != null ? moneyActor.getWidth() : 0) + Dimensions.MARGIN);
     }
 
 

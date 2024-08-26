@@ -21,7 +21,7 @@ public class CardActor extends Actor {
         String path = filesPath(card);
         aversTexture = new Texture(Gdx.files.internal(path));
         reversTexture = new Texture(Gdx.files.internal(REVERS_PATH));
-        setBounds(0, 0, PokerGame.CARD_WEIGHT, PokerGame.CARD_HEIGHT);
+        setBounds(0, 0, Dimensions.CARD_WEIGHT, Dimensions.CARD_HEIGHT);
     }
 
     private String filesPath(Card card) {

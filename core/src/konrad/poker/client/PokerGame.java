@@ -6,13 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class PokerGame extends Game {
 
-    public static final int WINDOW_WIDTH =1280;
-    public static final int MARGIN = 20;
-
-    public static final int CARD_HEIGHT = 654/5;
-    public static final int CARD_WEIGHT = 417/5;
-    public static final int WINDOW_HEIGHT = 720;
-
     private BitmapFont font;
     private SpriteBatch batch;
 

@@ -9,8 +9,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.Map;
 
-import static konrad.poker.client.PokerGame.*;
-
 public class GameScreen implements Screen {
 
 
@@ -25,7 +23,7 @@ public class GameScreen implements Screen {
         //zbudowanie okna i backendu
         controller = new Controller(pokerGame);
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, WINDOW_WIDTH, WINDOW_HEIGHT);
+        camera.setToOrtho(false, Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         stage = new Stage(new ScreenViewport(), pokerGame.getBatch());
 
         controller.setupActors(); //tworzymy elementy gry
@@ -40,8 +38,8 @@ public class GameScreen implements Screen {
         stage.addActor(deckGroup);
 
 
-        deckGroup.setX(WINDOW_WIDTH * 0.6666f);
-        deckGroup.setY(WINDOW_HEIGHT - CARD_HEIGHT *2);
+        deckGroup.setX(Dimensions.CENTER_X - Dimensions.CARD_WEIGHT/2f);
+        deckGroup.setY(Dimensions.CENTER_Y - Dimensions.CARD_HEIGHT/2f);
 
         controller.startGame(); //rozpoczecie gry (rozdawanie itd
 
@@ -57,7 +55,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) { //delta = czas który minął od poprzedniej klatki
-        ScreenUtils.clear(Color.WHITE);
+        ScreenUtils.clear(Color.DARK_GRAY);
+
         camera.update();
         pokerGame.getBatch().setProjectionMatrix(camera.combined);
         stage.act(delta); //aktorzy wykonują swoje akcje
