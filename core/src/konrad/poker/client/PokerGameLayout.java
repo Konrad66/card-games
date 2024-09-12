@@ -9,7 +9,7 @@ public class PokerGameLayout {
         int rightMargin = Dimensions.WINDOW_WIDTH - leftMargin - Dimensions.MONEY_SIZE;
         int yDown =  Dimensions.WINDOW_HEIGHT / 3;
         int yUp = Dimensions.WINDOW_HEIGHT / 2 + Dimensions.MARGIN;
-
+        playerLayout.hiddenCard = true;
         switch (position) {
             case 1:
                 playerLayout.x = Dimensions.WINDOW_WIDTH / 3;
@@ -51,7 +51,6 @@ public class PokerGameLayout {
             default:
                 throw new IllegalArgumentException("Valid positions: 1-6");
         }
-
        return playerLayout;
     }
 
@@ -62,6 +61,9 @@ public class PokerGameLayout {
         private Direction handDirection;
         private Direction moneyDirection;
         private boolean withMoney;
+
+        //todo ustawiłem ukrytą kartę
+        private boolean hiddenCard;
 
         public PlayerLayout() {
 
@@ -89,6 +91,10 @@ public class PokerGameLayout {
 
         public Direction getMoneyDirection() {
             return moneyDirection;
+        }
+
+        public boolean isHiddenCard() {
+            return hiddenCard;
         }
     }
 }

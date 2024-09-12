@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import konrad.poker.server.Player;
+import konrad.poker.server.PlayerScheme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +21,11 @@ public class PlayerGroup extends Group {
      * Nullable
      */
     private MoneyActor moneyActor;
+    private Player player;
     private int cardsAdded = 0;
 
-    public PlayerGroup(HandGroup handGroup, MoneyActor moneyActor) {
+    public PlayerGroup(HandGroup handGroup, MoneyActor moneyActor, Player player) {
+        this.player = player;
         setupHandGroup(handGroup);
         setupMoneyActor(moneyActor);
         updateWidth();
@@ -52,7 +56,8 @@ public class PlayerGroup extends Group {
             protected void begin() {
                 cardActor.leaveGroup(); //startowa pozycja karty przed animacją
                 super.begin(); //zaczytanie pozycji karty do animacji
-                cardActor.setHidden(false);
+                cardActor.setHidden(player.isHiddenCards());
+
                 Vector2 target = getNewCardPosition();
                 float targetX = target.x;
                 float targetY = target.y;
@@ -95,7 +100,6 @@ public class PlayerGroup extends Group {
     private void updateWidth() {
         setWidth(handGroup.getWidth() +  (moneyActor != null ? moneyActor.getWidth() : 0) + Dimensions.MARGIN);
     }
-
 
     Vector2 getNewCardPosition() {
         return handGroup.getNewCardPosition();

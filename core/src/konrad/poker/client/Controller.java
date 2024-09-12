@@ -12,7 +12,7 @@ public class Controller {
     private PokerGameRules pokerGameRules = new PokerGameRules();
     private PokerGame pokerGame;
     private DeckGroup deck;
-    private Map<Integer,PlayerGroup> players = new HashMap<>();
+    private Map<Integer, PlayerGroup> players = new HashMap<>();
 
     public Controller(PokerGame pokerGame) {
         this.pokerGame = pokerGame;
@@ -30,10 +30,18 @@ public class Controller {
             PokerGameLayout.PlayerLayout playerLayout = layout.getLayoutFor(player.getId());
             MoneyActor moneyActor = null;
             if (playerLayout.isWithMoney()) {
-                moneyActor = new MoneyActor(player, pokerGame.getFont(), playerLayout.isMovable(),playerLayout.getMoneyDirection());
+                moneyActor = new MoneyActor(player, pokerGame.getFont(), playerLayout.isMovable(), playerLayout.getMoneyDirection());
             }
+
+
+            //todo utknąłem
+            if (playerLayout.isHiddenCard()) {
+
+            }
+
+
             HandGroup hand = new HandGroup(playerLayout.getHandDirection());
-            PlayerGroup playerGroup = new PlayerGroup(hand, moneyActor);
+            PlayerGroup playerGroup = new PlayerGroup(hand, moneyActor, player);
             playerGroup.setX(playerLayout.getX());
             playerGroup.setY(playerLayout.getY());
             players.put(player.getId(), playerGroup);
@@ -44,12 +52,11 @@ public class Controller {
         deck = new DeckGroup(this);
     }
 
-
     void startGame() {
-        List<Command> commands = pokerGameRules.getStartCommands();
-        for (Command command : commands) {
-            playCommand(command);
-        }
+        pokerGameRules.getStartCommands()
+                .forEach(this::playCommand);
+        //todo po lewej na czym wywyołujemy np nazwa klasy przy metodach statycznych, this jeśli to jest ten obiekt :: po prawej jest nazwa metyody którą chcemy wywołać, bez parametrów -
+        //todo metod reference możemy użyć jeżeli nie ma parametrów lub jest oczywiste np tak jak w tym przypadku
     }
 
     private void playCommand(Command command) {
@@ -65,7 +72,6 @@ public class Controller {
                 deck.playerDraws(players.get(command.getPlayerId()), command.getAmount());
         }
     }
-
 
     public List<Card> getDeckCards() {
         return pokerService.getDeckCards();

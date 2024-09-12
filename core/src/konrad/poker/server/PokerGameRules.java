@@ -6,24 +6,27 @@ import java.util.List;
 public class PokerGameRules {
 
     private List<PlayerScheme> players = new ArrayList<>();
-    private static final int NUMBER_OF_PLAYERS = 5;
+    private static final int NUMBER_OF_COMPUTERS = 4;
+    private static final int DEALER_ID = 6;
+    private static final int HUMAN_ID = 1;
 
     public PokerGameRules() {
-        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            players.add(new PlayerScheme(i + 1, PlayerType.HUMAN));
+        for (int i = 0; i < NUMBER_OF_COMPUTERS; i++) {
+            players.add(new PlayerScheme(i + 2, PlayerType.COMPUTER, true));
         }
-        players.add(new PlayerScheme(6, PlayerType.DEALER));
+        players.add(new PlayerScheme(HUMAN_ID, PlayerType.HUMAN, false));
+        players.add(new PlayerScheme(DEALER_ID, PlayerType.DEALER, false));
     }
 
     public List<Command> getStartCommands() {
         List<Command> commandList = new ArrayList<>();
-        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+        commandList.add(new Command(CommandType.DRAW, 2, HUMAN_ID));
+        for (int i = 0; i < NUMBER_OF_COMPUTERS; i++) {
             commandList.add(new Command(CommandType.DRAW, 2, players.get(i).getId()));
         }
-        commandList.add(new Command(CommandType.DRAW, 3, 6));
+        commandList.add(new Command(CommandType.DRAW, 3, DEALER_ID));
         return commandList;
     }
-    //todo magic number dealer = 6, do zmiennej
 
     public List<PlayerScheme> getPlayers() {
         return players;

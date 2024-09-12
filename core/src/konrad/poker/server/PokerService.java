@@ -37,10 +37,13 @@ public class PokerService {
         List<PlayerScheme> playerSchemes = pokerGameRules.getPlayers();
         for (PlayerScheme playerScheme : playerSchemes) {
             Player player;
-            if (playerScheme.getPlayerType().equals(PlayerType.HUMAN)) {
-                player = new Player(1000, playerScheme.getId());
+            //todo switch
+            if (playerScheme.getPlayerType().equals(PlayerType.COMPUTER)) {
+                player = new Player(1000, playerScheme.getId(), playerScheme.isHiddenCards());
+            } else if (playerScheme.getPlayerType().equals(PlayerType.HUMAN)) {
+                player = new Player(1000, playerScheme.getId(), playerScheme.isHiddenCards());
             } else {
-                player = new Dealer(playerScheme.getId());
+                player = new Dealer(playerScheme.getId(), playerScheme.isHiddenCards());
             }
             players.add(player);
         }

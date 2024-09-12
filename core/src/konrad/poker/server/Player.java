@@ -8,10 +8,12 @@ public class Player {
     private List<Card> playerCards = new ArrayList<>();
     private int money;
     private int id;
+    private boolean hiddenCards;
 
-    public Player(int money, int id) {
+    public Player(int money, int id, boolean hiddenCards) {
         this.money = money;
         this.id = id;
+        this.hiddenCards = hiddenCards;
     }
 
     public int getMoney() {
@@ -20,6 +22,10 @@ public class Player {
 
     public int getId() {
         return id;
+    }
+
+    public boolean isHiddenCards() {
+        return hiddenCards;
     }
 
     public void drawCard(List<Card> cardsDeck, int amount) {
@@ -40,6 +46,7 @@ public class Player {
                 "playerCards=" + playerCards +
                 ", money=" + money +
                 ", id=" + id +
+                ", hiddenCards=" + hiddenCards +
                 '}';
     }
 }
