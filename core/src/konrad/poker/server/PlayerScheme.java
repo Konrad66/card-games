@@ -1,27 +1,27 @@
 package konrad.poker.server;
 
-public class PlayerScheme {
+public record PlayerScheme() {
 
-    private int id;
-    private PlayerType playerType;
-    private boolean hiddenCards;
-
-    public PlayerScheme(int id, PlayerType playerType, boolean hiddenCards) {
-        this.id = id;
-        this.playerType = playerType;
-        this.hiddenCards = hiddenCards;
-    }
+//    private int id;
+//    private PlayerType playerType;
+//    private boolean hiddenCards;
+//
+//    public PlayerScheme(int id, PlayerType playerType, boolean hiddenCards) {
+//        this.id = id;
+//        this.playerType = playerType;
+//        this.hiddenCards = hiddenCards;
+//    }
 
     public int getId() {
-        return id;
+        return 0;
     }
 
     public PlayerType getPlayerType() {
-        return playerType;
+        return null;
     }
 
     public boolean isHiddenCards() {
-        return hiddenCards;
+        return true;
     }
 
     //todo rekord tutaj

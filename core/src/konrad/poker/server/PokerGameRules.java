@@ -16,10 +16,11 @@ public class PokerGameRules {
 //            if (i == HUMAN_ID) {
 //                continue;
 //            }
-            players.add(new PlayerScheme(i + 2, PlayerType.COMPUTER, true));
+            //todo uncomment
+           // players.add(new PlayerScheme(i + 2, PlayerType.COMPUTER, true));
         }
-        players.add(new PlayerScheme(HUMAN_ID, PlayerType.HUMAN, false));
-        players.add(new PlayerScheme(DEALER_ID, PlayerType.DEALER, false));
+       // players.add(new PlayerScheme(HUMAN_ID, PlayerType.HUMAN, false));
+       // players.add(new PlayerScheme(DEALER_ID, PlayerType.DEALER, false));
     }
 
     public List<Command> getStartCommands() {
