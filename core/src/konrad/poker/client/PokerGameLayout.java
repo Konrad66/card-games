@@ -42,10 +42,14 @@ public class PokerGameLayout {
                 playerLayout.moneyDirection = Direction.RIGHT;
                 break;
             case 6:
-                playerLayout.x = Dimensions.WINDOW_WIDTH / 3;
-                playerLayout.y = Dimensions.WINDOW_HEIGHT - Dimensions.CARD_HEIGHT - Dimensions.MARGIN;
-                playerLayout.withMoney = false;
+                //todo poszukać najlepszej pozycji
+                //playerLayout.x = Dimensions.WINDOW_WIDTH / 3;
+                playerLayout.x = Dimensions.CENTER_X - Dimensions.CARD_WEIGHT/2;
+                playerLayout.y = Dimensions.CENTER_Y - Dimensions.CARD_HEIGHT/2;
+                //playerLayout.y = Dimensions.WINDOW_HEIGHT - Dimensions.CARD_HEIGHT - Dimensions.MARGIN;
+                //playerLayout.withMoney = true;
                 playerLayout.handDirection = Direction.RIGHT;
+                playerLayout.moneyDirection = Direction.LEFT;
                 break;
             default:
                 throw new IllegalArgumentException("Valid positions: 1-6");

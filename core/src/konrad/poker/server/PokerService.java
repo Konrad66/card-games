@@ -6,6 +6,7 @@ import konrad.poker.client.Rank;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 
 public class PokerService {
@@ -67,8 +68,7 @@ public class PokerService {
     public boolean executeCommand(Command command) {
         switch (command.getType()) {
             case DRAW:
-                players.get(0).drawCard(cardDeck, command.getAmount());
-                //todo dynamiczne wybieranie playera po id
+                getPlayerById(command.getPlayerId()).drawCard(cardDeck, command.getAmount());
         }
         return true;
     }
@@ -83,6 +83,11 @@ public class PokerService {
     public List<Card> getDeckCards() {
         return cardDeck;
     }
-}
 
-//todo zastanowic sie jak widzimy karty innego gracza
+    private Player getPlayerById(int id){
+        return players.stream()
+                .filter(player -> player.getId() == id)
+                .findAny()
+                .orElseThrow();
+    }
+}

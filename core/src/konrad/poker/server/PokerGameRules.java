@@ -12,7 +12,6 @@ public class PokerGameRules {
     private static final int HUMAN_ID = 3;
 
     public PokerGameRules() {
-        //todo ma przechodzić od 1 - 5 pomijając numer gracza
         for (int i = 1; players.size() < NUMBER_OF_COMPUTERS; i++) {
             if (i == HUMAN_ID) {
                 continue;

@@ -37,9 +37,11 @@ public class GameScreen implements Screen {
         DeckGroup deckGroup = controller.getDeck();
         stage.addActor(deckGroup);
 
-
-        deckGroup.setX(Dimensions.CENTER_X - Dimensions.CARD_WEIGHT/2f);
-        deckGroup.setY(Dimensions.CENTER_Y - Dimensions.CARD_HEIGHT/2f);
+        //todo ustawić centrum
+        deckGroup.setX(Dimensions.WINDOW_WIDTH / 3f);
+        //deckGroup.setX(Dimensions.CENTER_X - Dimensions.CARD_WEIGHT/2f);
+        //deckGroup.setY(Dimensions.CENTER_Y - Dimensions.CARD_HEIGHT/2f);
+        deckGroup.setY(Dimensions.WINDOW_HEIGHT - Dimensions.CARD_HEIGHT - Dimensions.MARGIN);
 
         controller.startGame(); //rozpoczecie gry (rozdawanie itd
 
