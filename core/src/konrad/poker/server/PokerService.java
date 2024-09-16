@@ -37,13 +37,13 @@ public class PokerService {
         List<PlayerScheme> playerSchemes = pokerGameRules.getPlayers();
         for (PlayerScheme playerScheme : playerSchemes) {
             Player player;
-            switch (playerScheme.getPlayerType()) {
+            switch (playerScheme.playerType()) {
                 case COMPUTER:
                 case HUMAN:
-                    player = new Player(1000, playerScheme.getId(), playerScheme.isHiddenCards());
+                    player = new Player(1000, playerScheme.id(), playerScheme.hiddenCards());
                     break;
                 case DEALER:
-                    player = new Dealer(playerScheme.getId(), playerScheme.isHiddenCards());
+                    player = new Dealer(playerScheme.id(), playerScheme.hiddenCards());
                     break;
                 default:
                     throw new IllegalStateException("Nieobsługiwany typ gracza");

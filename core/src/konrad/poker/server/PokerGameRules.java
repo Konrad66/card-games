@@ -17,17 +17,17 @@ public class PokerGameRules {
 //                continue;
 //            }
             //todo uncomment
-           // players.add(new PlayerScheme(i + 2, PlayerType.COMPUTER, true));
+            players.add(new PlayerScheme(i + 2, PlayerType.COMPUTER, true));
         }
-       // players.add(new PlayerScheme(HUMAN_ID, PlayerType.HUMAN, false));
-       // players.add(new PlayerScheme(DEALER_ID, PlayerType.DEALER, false));
+        players.add(new PlayerScheme(HUMAN_ID, PlayerType.HUMAN, false));
+        players.add(new PlayerScheme(DEALER_ID, PlayerType.DEALER, false));
     }
 
     public List<Command> getStartCommands() {
         List<Command> commandList = new ArrayList<>();
         commandList.add(new Command(CommandType.DRAW, 2, HUMAN_ID));
         for (int i = 0; i < NUMBER_OF_COMPUTERS; i++) {
-            commandList.add(new Command(CommandType.DRAW, 2, players.get(i).getId()));
+            commandList.add(new Command(CommandType.DRAW, 2, players.get(i).id()));
         }
         commandList.add(new Command(CommandType.DRAW, 3, DEALER_ID));
         return commandList;
