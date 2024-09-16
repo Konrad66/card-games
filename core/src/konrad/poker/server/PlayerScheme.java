@@ -23,4 +23,6 @@ public class PlayerScheme {
     public boolean isHiddenCards() {
         return hiddenCards;
     }
+
+    //todo rekord tutaj
 }

@@ -37,13 +37,16 @@ public class PokerService {
         List<PlayerScheme> playerSchemes = pokerGameRules.getPlayers();
         for (PlayerScheme playerScheme : playerSchemes) {
             Player player;
-            //todo switch
-            if (playerScheme.getPlayerType().equals(PlayerType.COMPUTER)) {
-                player = new Player(1000, playerScheme.getId(), playerScheme.isHiddenCards());
-            } else if (playerScheme.getPlayerType().equals(PlayerType.HUMAN)) {
-                player = new Player(1000, playerScheme.getId(), playerScheme.isHiddenCards());
-            } else {
-                player = new Dealer(playerScheme.getId(), playerScheme.isHiddenCards());
+            switch (playerScheme.getPlayerType()) {
+                case COMPUTER:
+                case HUMAN:
+                    player = new Player(1000, playerScheme.getId(), playerScheme.isHiddenCards());
+                    break;
+                case DEALER:
+                    player = new Dealer(playerScheme.getId(), playerScheme.isHiddenCards());
+                    break;
+                default:
+                    throw new IllegalStateException("Nieobsługiwany typ gracza");
             }
             players.add(player);
         }
@@ -64,7 +67,8 @@ public class PokerService {
     public boolean executeCommand(Command command) {
         switch (command.getType()) {
             case DRAW:
-                players.get(0).drawCard(cardDeck, command.getAmount()); //todo dynamiczne wybieranie playera po id
+                players.get(0).drawCard(cardDeck, command.getAmount());
+                //todo dynamiczne wybieranie playera po id
         }
         return true;
     }

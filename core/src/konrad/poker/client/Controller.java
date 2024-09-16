@@ -33,13 +33,6 @@ public class Controller {
                 moneyActor = new MoneyActor(player, pokerGame.getFont(), playerLayout.isMovable(), playerLayout.getMoneyDirection());
             }
 
-
-            //todo utknąłem
-            if (playerLayout.isHiddenCard()) {
-
-            }
-
-
             HandGroup hand = new HandGroup(playerLayout.getHandDirection());
             PlayerGroup playerGroup = new PlayerGroup(hand, moneyActor, player);
             playerGroup.setX(playerLayout.getX());

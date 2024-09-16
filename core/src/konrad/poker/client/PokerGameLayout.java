@@ -9,34 +9,33 @@ public class PokerGameLayout {
         int rightMargin = Dimensions.WINDOW_WIDTH - leftMargin - Dimensions.MONEY_SIZE;
         int yDown =  Dimensions.WINDOW_HEIGHT / 3;
         int yUp = Dimensions.WINDOW_HEIGHT / 2 + Dimensions.MARGIN;
-        playerLayout.hiddenCard = true;
         switch (position) {
-            case 1:
+            case 3:
                 playerLayout.x = Dimensions.WINDOW_WIDTH / 3;
                 playerLayout.y = Dimensions.MARGIN;
                 playerLayout.movable = true;
                 playerLayout.handDirection = Direction.RIGHT;
                 playerLayout.moneyDirection = Direction.RIGHT;
                 break;
-            case 2: //lewy dół
+            case 4: //lewy dół
                 playerLayout.x =leftMargin;
                 playerLayout.y = yDown;
                 playerLayout.handDirection = Direction.RIGHT;
                 playerLayout.moneyDirection = Direction.LEFT;
                 break;
-            case 3: // lewa góra
+            case 5: // lewa góra
                 playerLayout.x =leftMargin;
                 playerLayout.y = yUp;
                 playerLayout.handDirection = Direction.RIGHT;
                 playerLayout.moneyDirection = Direction.LEFT;
                 break;
-            case 4: //prawy dół
+            case 2: //prawy dół
                 playerLayout.x = rightMargin;
                 playerLayout.y = yDown;
                 playerLayout.handDirection = Direction.LEFT;
                 playerLayout.moneyDirection = Direction.RIGHT;
                 break;
-            case 5: // prawa góra
+            case 1: // prawa góra
                 playerLayout.x = rightMargin;
                 playerLayout.y = yUp ;
                 playerLayout.handDirection = Direction.LEFT;
@@ -61,9 +60,6 @@ public class PokerGameLayout {
         private Direction handDirection;
         private Direction moneyDirection;
         private boolean withMoney;
-
-        //todo ustawiłem ukrytą kartę
-        private boolean hiddenCard;
 
         public PlayerLayout() {
 
@@ -93,8 +89,5 @@ public class PokerGameLayout {
             return moneyDirection;
         }
 
-        public boolean isHiddenCard() {
-            return hiddenCard;
-        }
     }
 }

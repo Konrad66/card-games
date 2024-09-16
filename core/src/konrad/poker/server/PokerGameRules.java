@@ -11,7 +11,11 @@ public class PokerGameRules {
     private static final int HUMAN_ID = 1;
 
     public PokerGameRules() {
+        //todo ma przechodzić od 1 - 5 pomijając numer gracza
         for (int i = 0; i < NUMBER_OF_COMPUTERS; i++) {
+//            if (i == HUMAN_ID) {
+//                continue;
+//            }
             players.add(new PlayerScheme(i + 2, PlayerType.COMPUTER, true));
         }
         players.add(new PlayerScheme(HUMAN_ID, PlayerType.HUMAN, false));
