@@ -48,6 +48,7 @@ public class Controller {
     void startGame() {
         pokerGameRules.getStartCommands()
                 .forEach(this::playCommand);
+        pokerService.printStatus();
         //todo po lewej na czym wywyołujemy np nazwa klasy przy metodach statycznych, this jeśli to jest ten obiekt :: po prawej jest nazwa metyody którą chcemy wywołać, bez parametrów -
         //todo metod reference możemy użyć jeżeli nie ma parametrów lub jest oczywiste np tak jak w tym przypadku
     }

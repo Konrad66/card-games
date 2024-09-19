@@ -6,7 +6,7 @@ import java.util.List;
 public class Player {
 
     private List<Card> playerCards = new ArrayList<>();
-    private int money;
+    int money;
     private int id;
     private boolean hiddenCards;
 
@@ -29,11 +29,15 @@ public class Player {
     }
 
     public void drawCard(List<Card> cardsDeck, int amount) {
-        for (int i =0; i < amount; i++){
+        for (int i = 0; i < amount; i++) {
             Card card = cardsDeck.get(0);
             playerCards.add(card);
             cardsDeck.remove(0);
         }
+    }
+
+    public void placeBlind(int blind) {
+        money -= blind;
     }
 
     public List<Card> getPlayerCards() {

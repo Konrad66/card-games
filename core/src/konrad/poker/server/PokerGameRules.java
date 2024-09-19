@@ -24,6 +24,10 @@ public class PokerGameRules {
 
     public List<Command> getStartCommands() {
         List<Command> commandList = new ArrayList<>();
+        commandList.add(new Command(CommandType.BID, 1, 1));
+        commandList.add(new Command(CommandType.BID, 2, 2));
+
+
         for (int i = 0; i < NUMBER_OF_COMPUTERS; i++) {
             commandList.add(new Command(CommandType.DRAW, 2, players.get(i).id()));
         }

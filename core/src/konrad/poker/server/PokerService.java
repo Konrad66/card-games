@@ -69,6 +69,12 @@ public class PokerService {
         switch (command.getType()) {
             case DRAW:
                 getPlayerById(command.getPlayerId()).drawCard(cardDeck, command.getAmount());
+                break;
+            case BID:
+                getPlayerById(command.getPlayerId()).placeBlind(command.getAmount());
+                //todo ustawic 6 -> jako dynamiczne wybieranie dealera
+                getPlayerById(6).placeBlind(command.getAmount());
+                break;
         }
         return true;
     }
@@ -89,5 +95,11 @@ public class PokerService {
                 .filter(player -> player.getId() == id)
                 .findAny()
                 .orElseThrow();
+    }
+
+    public void printStatus(){
+        for (Player player : players) {
+            System.out.println(player);
+        }
     }
 }
