@@ -17,25 +17,25 @@ public class MoneyActor extends Actor {
     private BitmapFont font;
     private boolean movable;
     private Direction direction;
-
+    private int money;
 
     public MoneyActor(Player player, BitmapFont font, boolean movable, Direction direction) {
         this.player = player;
         this.font = font;
         this.movable = movable;
         this.direction = direction;
+        money = player.getMoney();
         texture = new Texture(Gdx.files.internal("token/token.png"));
         setX(-Dimensions.MONEY_SIZE/8);
         setWidth(Dimensions.MONEY_SIZE);
         setHeight(Dimensions.MONEY_SIZE);
-
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
         font.setColor(Color.GREEN);
-        font.draw(batch, player.getMoney() + "", getX() + getWidth() / 2 - 15, getHeight() / 2 + 5 + getY()); //todo dynamiczne wyliczanie
+        font.draw(batch, money + "", getX() + getWidth() / 2 - 15, getHeight() / 2 + 5 + getY()); //todo dynamiczne wyliczanie
     }
 
     public boolean movable() {
@@ -45,5 +45,9 @@ public class MoneyActor extends Actor {
     public float getMoveX() {
         float move = Dimensions.CARD_WEIGHT + Dimensions.MARGIN;
         return direction == Direction.RIGHT ? move : -move;
+    }
+
+    public void placeBid(int bid) {
+        money -= bid;
     }
 }

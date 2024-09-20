@@ -51,6 +51,7 @@ public class PlayerGroup extends Group {
 
 
     public void addCardWithAnimation(CardActor cardActor) {
+        //todo anonimowa klasa
         MoveToAction moveCard = new MoveToAction() {
             @Override
             protected void begin() {
@@ -62,9 +63,10 @@ public class PlayerGroup extends Group {
                 float targetX = target.x;
                 float targetY = target.y;
                 setPosition(targetX, targetY);
-
             }
         };
+
+        //todo interfejs funkcyjny to taki z jedną metodą abstrakcyjną
 
         moveCard.setDuration(1);
         moveCard.setInterpolation(Interpolation.exp10);
@@ -95,6 +97,20 @@ public class PlayerGroup extends Group {
         }
         ActionManager.getInstance().playActions(finalAnimation);
         cardsAdded++;
+    }
+
+    public void placeBidWithAnimation(int bid){
+        List<Action> actions = new ArrayList<>();
+        Action removeBid = new Action() {
+            @Override
+            public boolean act(float v) {
+                moneyActor.placeBid(bid);
+                return true;
+            }
+        };
+        removeBid.setTarget(moneyActor);
+        actions.add(removeBid);
+        ActionManager.getInstance().playActions(actions);
     }
 
     private void updateWidth() {

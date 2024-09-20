@@ -64,6 +64,10 @@ public class Controller {
         switch (command.getType()) {
             case DRAW:
                 deck.playerDraws(players.get(command.getPlayerId()), command.getAmount());
+                break;
+            case BID:
+                players.get(command.getPlayerId()).placeBidWithAnimation(command.getAmount());
+                break;
         }
     }
 

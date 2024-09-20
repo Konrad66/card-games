@@ -20,10 +20,6 @@ public class ActionManager {
         return instance;
     }
 
-    public void playAction(Action action) {
-        playActions(Collections.singletonList(action));
-    }
-
     public void playActions(List<Action> actions){
         ActionSet actionSet = new ActionSet(actions);
         sets.add(actionSet);

@@ -6,7 +6,6 @@ import konrad.poker.client.Rank;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
 
 
 public class PokerService {
@@ -71,9 +70,9 @@ public class PokerService {
                 getPlayerById(command.getPlayerId()).drawCard(cardDeck, command.getAmount());
                 break;
             case BID:
-                getPlayerById(command.getPlayerId()).placeBlind(command.getAmount());
+                getPlayerById(command.getPlayerId()).placeBid(command.getAmount());
                 //todo ustawic 6 -> jako dynamiczne wybieranie dealera
-                getPlayerById(6).placeBlind(command.getAmount());
+                getPlayerById(6).placeBid(command.getAmount());
                 break;
         }
         return true;

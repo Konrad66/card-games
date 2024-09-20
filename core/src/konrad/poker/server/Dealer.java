@@ -7,7 +7,7 @@ public class Dealer extends Player {
     }
 
     @Override
-    public void placeBlind(int blind) {
-        money += blind;
+    public void placeBid(int bid) {
+        money += bid;
     }
 }

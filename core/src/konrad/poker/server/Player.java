@@ -36,8 +36,8 @@ public class Player {
         }
     }
 
-    public void placeBlind(int blind) {
-        money -= blind;
+    public void placeBid(int bid) {
+        money -= bid;
     }
 
     public List<Card> getPlayerCards() {
