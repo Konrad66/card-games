@@ -9,24 +9,25 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import konrad.poker.server.Player;
 
-public class MoneyActor extends Actor {
+public class MoneyActor extends MyActor {
 
     private Texture texture;
-    private Player player;
     private GlyphLayout glyphLayout = new GlyphLayout();
     private BitmapFont font;
     private boolean movable;
     private Direction direction;
     private int money;
+    private Mediator mediator;
 
-    public MoneyActor(Player player, BitmapFont font, boolean movable, Direction direction) {
-        this.player = player;
+    public MoneyActor(int money, BitmapFont font, boolean movable, Direction direction, Mediator mediator) {
+        super(mediator);
         this.font = font;
         this.movable = movable;
         this.direction = direction;
-        money = player.getMoney();
+        this.money = money;
+        this.mediator = mediator;
         texture = new Texture(Gdx.files.internal("token/token.png"));
-        setX(-Dimensions.MONEY_SIZE/8);
+        setX(-Dimensions.MONEY_SIZE / 8);
         setWidth(Dimensions.MONEY_SIZE);
         setHeight(Dimensions.MONEY_SIZE);
     }
@@ -47,7 +48,14 @@ public class MoneyActor extends Actor {
         return direction == Direction.RIGHT ? move : -move;
     }
 
-    public void placeBid(int bid) {
-        money -= bid;
+    public void placeBid(int bidValue) {
+        money -= bidValue;
+        spawnNewBid(bidValue);
+    }
+
+    private void spawnNewBid(int bidValue) {
+        MoneyActor bidActor = new MoneyActor(bidValue, font, false, Direction.LEFT, mediator);
+        mediator.spawnNewThing(bidActor);
+
     }
 }

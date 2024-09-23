@@ -13,7 +13,7 @@ import konrad.poker.server.PlayerScheme;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerGroup extends Group {
+public class PlayerGroup extends MyGroup {
 
 
     private HandGroup handGroup;
@@ -24,7 +24,8 @@ public class PlayerGroup extends Group {
     private Player player;
     private int cardsAdded = 0;
 
-    public PlayerGroup(HandGroup handGroup, MoneyActor moneyActor, Player player) {
+    public PlayerGroup(HandGroup handGroup, MoneyActor moneyActor, Player player, Mediator mediator) {
+        super(mediator);
         this.player = player;
         setupHandGroup(handGroup);
         setupMoneyActor(moneyActor);
@@ -105,11 +106,17 @@ public class PlayerGroup extends Group {
             @Override
             public boolean act(float v) {
                 moneyActor.placeBid(bid);
+
                 return true;
             }
         };
         removeBid.setTarget(moneyActor);
         actions.add(removeBid);
+
+
+
+
+
         ActionManager.getInstance().playActions(actions);
     }
 

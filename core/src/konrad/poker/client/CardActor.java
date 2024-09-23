@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import konrad.poker.server.Card;
 
-public class CardActor extends Actor {
+public class CardActor extends MyActor {
 
     private static final String CARDS_PATH = "cards/";
     private static final String REVERS_PATH = CARDS_PATH + "card_back/cardBackBlue.png";
@@ -16,8 +16,8 @@ public class CardActor extends Actor {
     private Texture reversTexture;
     private boolean hidden = true;
 
-
-    public CardActor(Card card) {
+    public CardActor(Card card, Mediator mediator) {
+        super(mediator);
         String path = filesPath(card);
         aversTexture = new Texture(Gdx.files.internal(path));
         reversTexture = new Texture(Gdx.files.internal(REVERS_PATH));
@@ -48,16 +48,7 @@ public class CardActor extends Actor {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 
-    void leaveGroup() {
-        Vector2 stageVector = getStageVector();
-        setX(stageVector.x);
-        setY(stageVector.y);
-        getStage().addActor(this);
-    }
 
-   private Vector2 getStageVector() {
-        return localToStageCoordinates(new Vector2(getX(),getY()));
-    }
 
     public void setHidden(boolean hidden) {
         this.hidden = hidden;

@@ -3,6 +3,7 @@ package konrad.poker.client;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -21,7 +22,7 @@ public class GameScreen implements Screen {
     public GameScreen(PokerGame pokerGame) {
         this.pokerGame = pokerGame;
         //zbudowanie okna i backendu
-        controller = new Controller(pokerGame);
+        controller = new Controller(pokerGame, this);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         stage = new Stage(new ScreenViewport(), pokerGame.getBatch());
@@ -48,6 +49,10 @@ public class GameScreen implements Screen {
 
         //rozgrywka
 
+    }
+
+    public void addToStage(Actor actor){
+        stage.addActor(actor);
     }
 
     @Override

@@ -8,11 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import java.util.List;
 
 
-public class HandGroup extends Group {
+public class HandGroup extends MyGroup {
 
     private Direction direction;
 
-    public HandGroup(Direction direction) {
+    public HandGroup(Direction direction, Mediator mediator) {
+        super(mediator);
         this.direction = direction;
     }
 

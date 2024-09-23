@@ -1,21 +1,25 @@
 package konrad.poker.client;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import konrad.poker.server.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Controller {
+public class Controller implements Mediator{
 
     private PokerService pokerService = new PokerService();
     private PokerGameRules pokerGameRules = new PokerGameRules();
     private PokerGame pokerGame;
     private DeckGroup deck;
     private Map<Integer, PlayerGroup> players = new HashMap<>();
+    private GameScreen gameScreen;
 
-    public Controller(PokerGame pokerGame) {
+
+    public Controller(PokerGame pokerGame, GameScreen gameScreen) {
         this.pokerGame = pokerGame;
+        this.gameScreen = gameScreen;
     }
 
     void setupActors() {
@@ -30,11 +34,11 @@ public class Controller {
             PokerGameLayout.PlayerLayout playerLayout = layout.getLayoutFor(player.getId());
             MoneyActor moneyActor = null;
             if (playerLayout.isWithMoney()) {
-                moneyActor = new MoneyActor(player, pokerGame.getFont(), playerLayout.isMovable(), playerLayout.getMoneyDirection());
+                moneyActor = new MoneyActor(player.getMoney(), pokerGame.getFont(), playerLayout.isMovable(), playerLayout.getMoneyDirection(), this);
             }
 
-            HandGroup hand = new HandGroup(playerLayout.getHandDirection());
-            PlayerGroup playerGroup = new PlayerGroup(hand, moneyActor, player);
+            HandGroup hand = new HandGroup(playerLayout.getHandDirection(), this);
+            PlayerGroup playerGroup = new PlayerGroup(hand, moneyActor, player, this);
             playerGroup.setX(playerLayout.getX());
             playerGroup.setY(playerLayout.getY());
             players.put(player.getId(), playerGroup);
@@ -42,7 +46,7 @@ public class Controller {
     }
 
     void createDeck() {
-        deck = new DeckGroup(this);
+        deck = new DeckGroup(this, this);
     }
 
     void startGame() {
@@ -71,6 +75,11 @@ public class Controller {
         }
     }
 
+    @Override
+    public void spawnNewThing(Actor actor){
+        gameScreen.addToStage(actor);
+    }
+
     public List<Card> getDeckCards() {
         return pokerService.getDeckCards();
     }
@@ -90,4 +99,7 @@ public class Controller {
                 ", deck=" + deck +
                 '}';
     }
+
+    //controller.spawnNewThing(A a)
+    //controller.playCommand(C c)
 }

@@ -42,7 +42,6 @@ public class PokerGameLayout {
                 playerLayout.moneyDirection = Direction.RIGHT;
                 break;
             case 6:
-                //todo poszukać najlepszej pozycji
                 //playerLayout.x = Dimensions.WINDOW_WIDTH / 3;
                 playerLayout.x = Dimensions.CENTER_X - Dimensions.CARD_WEIGHT/2;
                 playerLayout.y = Dimensions.CENTER_Y - Dimensions.CARD_HEIGHT/2;
