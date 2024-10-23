@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -19,7 +18,6 @@ import java.util.List;
 public class MoneyActor extends MyActor {
 
     private Texture texture;
-    private GlyphLayout glyphLayout = new GlyphLayout();
     private BitmapFont font;
     private boolean movable;
     private Direction direction;
@@ -115,5 +113,13 @@ public class MoneyActor extends MyActor {
 
     public void increaseMoney(int receivedMoney){
         money += receivedMoney;
+    }
+
+    public boolean isPresent() {
+        return true;
+    }
+
+    public static EmptyMoneyActor getEmpty(){
+        return EmptyMoneyActor.getInstance();
     }
 }

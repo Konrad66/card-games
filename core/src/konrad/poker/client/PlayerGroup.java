@@ -16,15 +16,15 @@ public class PlayerGroup extends MyGroup {
 
 
     private HandGroup handGroup;
-    /**
-     * Nullable
-     */
     private MoneyActor moneyActor;
     private Player player;
     private int cardsAdded = 0;
 
     public PlayerGroup(HandGroup handGroup, MoneyActor moneyActor, Player player, Mediator mediator) {
         super(mediator);
+        if (moneyActor == null) {//null object pattern
+            moneyActor = MoneyActor.getEmpty();
+        }
         this.player = player;
         setupHandGroup(handGroup);
         setupMoneyActor(moneyActor);
@@ -37,9 +37,6 @@ public class PlayerGroup extends MyGroup {
     }
 
     private void setupMoneyActor(MoneyActor moneyActor) {
-        if (moneyActor == null) {
-            return;
-        }
         this.moneyActor = moneyActor;
         addActor(moneyActor);
     }
@@ -70,7 +67,6 @@ public class PlayerGroup extends MyGroup {
         moveCard.setInterpolation(Interpolation.exp10);
 
 
-
         Action finishAnimation = new Action() { //todo anonimowe klasy
             @Override
             public boolean act(float delta) {
@@ -88,8 +84,8 @@ public class PlayerGroup extends MyGroup {
 
         List<Action> finalAnimation = new ArrayList<>();
         finalAnimation.add(sequence);
-        if (moneyActor != null && (cardsAdded ==0 || moneyActor.movable())) {
-            Action moveMoney = Actions.moveBy( moneyActor.getMoveX(), 0, 0.7f, Interpolation.fastSlow);
+        if (moneyActor.isPresent() && (cardsAdded == 0 || moneyActor.movable())) {
+            Action moveMoney = Actions.moveBy(moneyActor.getMoveX(), 0, 0.7f, Interpolation.fastSlow);
             moveMoney.setTarget(moneyActor);
             finalAnimation.add(moveMoney);
         }
@@ -97,7 +93,7 @@ public class PlayerGroup extends MyGroup {
         cardsAdded++;
     }
 
-    public void placeBidWithAnimation(int bid){
+    public void placeBidWithAnimation(int bid) {
         List<Action> actions = moneyActor.placeBidAnimated(bid);
         for (Action action : actions) {
             ActionManager.getInstance().playActions(List.of(action));
@@ -105,7 +101,7 @@ public class PlayerGroup extends MyGroup {
     }
 
     private void updateWidth() {
-        setWidth(handGroup.getWidth() +  (moneyActor != null ? moneyActor.getWidth() : 0) + Dimensions.MARGIN);
+        setWidth(handGroup.getWidth() + (moneyActor.isPresent() ? moneyActor.getWidth() : 0) + Dimensions.MARGIN);
     }
 
     Vector2 getNewCardPosition() {
@@ -124,11 +120,14 @@ public class PlayerGroup extends MyGroup {
         return moneyActor.getStageVector();
     }
 
-    public void increaseDealerMoney(int receivedMoney){
-        if(moneyActor != null){
-            moneyActor.increaseMoney(receivedMoney);
-
-        }
+    public void increaseDealerMoney(int receivedMoney) {
+        moneyActor.increaseMoney(receivedMoney);
     }
 
 }
+
+//todo przebudowa systemu animacji: wyraźnie oddzielenie kodu odbiorcy i adresata przy akcjach przekazywania
+//ewentualna fabryka akcji
+// inicjacja animacji:
+//  wysyłający
+//  odbierający

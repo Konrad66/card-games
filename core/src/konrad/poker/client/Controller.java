@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Controller implements Mediator{
+public class Controller implements Mediator {
 
     private PokerService pokerService = new PokerService();
     private PokerGameRules pokerGameRules = new PokerGameRules();
@@ -77,7 +77,7 @@ public class Controller implements Mediator{
     }
 
     @Override
-    public void spawnNewThing(Actor actor){
+    public void spawnNewThing(Actor actor) {
         gameScreen.addToStage(actor);
     }
 
@@ -88,14 +88,12 @@ public class Controller implements Mediator{
 
     @Override
     public void increaseDealerMoney(int receivedMoney) {
-        PlayerGroup dealer = players.get(pokerGameRules.getIdBy(PlayerType.DEALER));
-        dealer.increaseDealerMoney(receivedMoney);
+        getDealer().increaseDealerMoney(receivedMoney);
     }
 
     @Override
     public Vector2 getDealerMoneyVector() {
-        PlayerGroup playerGroup = players.get(pokerGameRules.getIdBy(PlayerType.DEALER));
-        return playerGroup.getMoneyVector();
+        return getDealer().getMoneyVector();
     }
 
     public List<Card> getDeckCards() {
@@ -116,6 +114,10 @@ public class Controller implements Mediator{
                 "player=" + players +
                 ", deck=" + deck +
                 '}';
+    }
+
+    private PlayerGroup getDealer() {
+        return players.get(pokerGameRules.getIdBy(PlayerType.DEALER));
     }
 
     //controller.spawnNewThing(A a)
