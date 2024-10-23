@@ -124,4 +124,11 @@ public class PlayerGroup extends MyGroup {
         return moneyActor.getStageVector();
     }
 
+    public void increaseDealerMoney(int receivedMoney){
+        if(moneyActor != null){
+            moneyActor.increaseMoney(receivedMoney);
+
+        }
+    }
+
 }

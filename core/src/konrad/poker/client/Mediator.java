@@ -10,4 +10,6 @@ public interface Mediator {
     Vector2 getDealerMoneyVector();
 
     void removeThing(Actor actor);
+
+    void increaseDealerMoney(int money);
 }

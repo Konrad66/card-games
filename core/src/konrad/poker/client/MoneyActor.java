@@ -81,6 +81,7 @@ public class MoneyActor extends MyActor {
             @Override
             public boolean act(float delta) {
                 mediator.removeThing(target);
+                mediator.increaseDealerMoney(bidValue);
                 return true;
             }
         };
@@ -110,5 +111,9 @@ public class MoneyActor extends MyActor {
         bidActor.setY(stageVector.y - yOffset);
         mediator.spawnNewThing(bidActor);
        return bidActor;
+    }
+
+    public void increaseMoney(int receivedMoney){
+        money += receivedMoney;
     }
 }

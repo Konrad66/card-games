@@ -87,6 +87,12 @@ public class Controller implements Mediator{
     }
 
     @Override
+    public void increaseDealerMoney(int receivedMoney) {
+        PlayerGroup dealer = players.get(pokerGameRules.getIdBy(PlayerType.DEALER));
+        dealer.increaseDealerMoney(receivedMoney);
+    }
+
+    @Override
     public Vector2 getDealerMoneyVector() {
         PlayerGroup playerGroup = players.get(pokerGameRules.getIdBy(PlayerType.DEALER));
         return playerGroup.getMoneyVector();
