@@ -1,5 +1,6 @@
 package konrad.poker.client;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import konrad.poker.server.*;
 
@@ -78,6 +79,17 @@ public class Controller implements Mediator{
     @Override
     public void spawnNewThing(Actor actor){
         gameScreen.addToStage(actor);
+    }
+
+    @Override
+    public void removeThing(Actor actor) {
+        gameScreen.removeFromStage(actor);
+    }
+
+    @Override
+    public Vector2 getDealerMoneyVector() {
+        PlayerGroup playerGroup = players.get(pokerGameRules.getIdBy(PlayerType.DEALER));
+        return playerGroup.getMoneyVector();
     }
 
     public List<Card> getDeckCards() {

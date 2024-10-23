@@ -55,6 +55,10 @@ public class GameScreen implements Screen {
         stage.addActor(actor);
     }
 
+    public void removeFromStage(Actor actor){
+        stage.getRoot().removeActor(actor);
+    }
+
     @Override
     public void show() {
 

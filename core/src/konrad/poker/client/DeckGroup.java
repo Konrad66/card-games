@@ -1,6 +1,5 @@
 package konrad.poker.client;
 
-import com.badlogic.gdx.scenes.scene2d.Group;
 import konrad.poker.server.Card;
 
 import java.util.Deque;

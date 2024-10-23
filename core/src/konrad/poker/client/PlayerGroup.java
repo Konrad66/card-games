@@ -4,11 +4,10 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import konrad.poker.client.actions.ActionManager;
 import konrad.poker.server.Player;
-import konrad.poker.server.PlayerScheme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,6 @@ public class PlayerGroup extends MyGroup {
         }
         this.moneyActor = moneyActor;
         addActor(moneyActor);
-        moneyActor.setY(Dimensions.MARGIN);
     }
 
     //todo ułożenie kart na stole dac mozliwosc wylaczania licznika dla niektorych pozycji na potrzeby pozycji z prawej ukladanie kart w lewo;
@@ -59,7 +57,6 @@ public class PlayerGroup extends MyGroup {
                 cardActor.leaveGroup(); //startowa pozycja karty przed animacją
                 super.begin(); //zaczytanie pozycji karty do animacji
                 cardActor.setHidden(player.isHiddenCards());
-
                 Vector2 target = getNewCardPosition();
                 float targetX = target.x;
                 float targetY = target.y;
@@ -101,23 +98,10 @@ public class PlayerGroup extends MyGroup {
     }
 
     public void placeBidWithAnimation(int bid){
-        List<Action> actions = new ArrayList<>();
-        Action removeBid = new Action() {
-            @Override
-            public boolean act(float v) {
-                moneyActor.placeBid(bid);
-
-                return true;
-            }
-        };
-        removeBid.setTarget(moneyActor);
-        actions.add(removeBid);
-
-
-
-
-
-        ActionManager.getInstance().playActions(actions);
+        List<Action> actions = moneyActor.placeBidAnimated(bid);
+        for (Action action : actions) {
+            ActionManager.getInstance().playActions(List.of(action));
+        }
     }
 
     private void updateWidth() {
@@ -134,6 +118,10 @@ public class PlayerGroup extends MyGroup {
             throw new IllegalArgumentException("Don't add card directly to PlayerGroup. Add to HandGroup");
         }
         super.addActor(actor);
+    }
+
+    public Vector2 getMoneyVector() {
+        return moneyActor.getStageVector();
     }
 
 }

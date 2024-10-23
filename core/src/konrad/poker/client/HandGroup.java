@@ -3,7 +3,6 @@ package konrad.poker.client;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 
 import java.util.List;
 
@@ -39,10 +38,6 @@ public class HandGroup extends MyGroup {
     private float getNewCardX() {
         float x = Dimensions.CARD_WEIGHT  * getChildren().size + Dimensions.MARGIN/2f * getChildren().size;
         return direction == Direction.RIGHT ? x : -x;
-    }
-
-    private Vector2 getStageVector() {
-        return localToStageCoordinates(new Vector2(getX(),getY()));
     }
 
     public Direction getDirection() {

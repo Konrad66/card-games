@@ -35,11 +35,21 @@ public class PokerGameRules {
         commandList.add(new Command(CommandType.DRAW, 3, DEALER_ID));
         commandList.sort(Comparator.comparingInt(Command::getPlayerId));
         //todo przeanalizowac
-        //commandList.sort((command1, command2) -> command1.getPlayerId() - command2.getPlayerId());
+        commandList.sort((command1, command2) -> command1.getPlayerId() - command2.getPlayerId());
         return commandList;
     }
 
     public List<PlayerScheme> getPlayers() {
         return players;
+    }
+
+    public int getIdBy(PlayerType type){
+        if (type.equals(PlayerType.DEALER)){
+            return DEALER_ID;
+        } else if (type.equals(PlayerType.HUMAN)) {
+            return HUMAN_ID;
+        } else {
+            return 1;
+        }
     }
 }

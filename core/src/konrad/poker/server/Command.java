@@ -25,5 +25,12 @@ public class Command {
         return playerId;
     }
 
-
+    @Override
+    public String toString() {
+        return "Command{" +
+                "type=" + type +
+                ", amount=" + amount +
+                ", playerId=" + playerId +
+                '}';
+    }
 }

@@ -15,10 +15,10 @@ public class MyGroup extends Group {
         Vector2 stageVector = getStageVector();
         setX(stageVector.x);
         setY(stageVector.y);
-        getStage().addActor(this);
+        mediator.spawnNewThing(this);
     }
 
-    private Vector2 getStageVector() {
+    public Vector2 getStageVector() {
         return localToStageCoordinates(new Vector2(getX(),getY()));
     }
 }
