@@ -8,14 +8,14 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class PokerService {
+public class GameService {
 
     private List<Card> cardDeck = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
-    private PokerGameRules pokerGameRules = new PokerGameRules();
+    private GameRules gameRules = new BlackJackGameRules();
 
 
-    public PokerService() {
+    public GameService() {
         createCards();
         shuffleDeck();
         createPlayers();
@@ -34,7 +34,7 @@ public class PokerService {
     }
 
     private void createPlayers() {
-        List<PlayerScheme> playerSchemes = pokerGameRules.getPlayers();
+        List<PlayerScheme> playerSchemes = gameRules.getPlayers();
         for (PlayerScheme playerScheme : playerSchemes) {
             Player player;
             switch (playerScheme.playerType()) {
@@ -50,6 +50,14 @@ public class PokerService {
             }
             players.add(player);
         }
+    }
+
+    public List<Command> getStartCommands() {
+        return gameRules.getStartCommands();
+    }
+
+    public int getIdBy(PlayerType type) {
+        return gameRules.getIdBy(type);
     }
 
     public Card getCard() {
@@ -89,14 +97,14 @@ public class PokerService {
         return cardDeck;
     }
 
-    private Player getPlayerById(int id){
+    private Player getPlayerById(int id) {
         return players.stream()
                 .filter(player -> player.getId() == id)
                 .findAny()
                 .orElseThrow();
     }
 
-    public void printStatus(){
+    public void printStatus() {
         for (Player player : players) {
             System.out.println(player);
         }

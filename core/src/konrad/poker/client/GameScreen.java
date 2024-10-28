@@ -15,17 +15,17 @@ public class GameScreen implements Screen {
 
     private Controller controller;
     private OrthographicCamera camera;
-    private PokerGame pokerGame;
+    private CardGame cardGame;
     private Stage stage;
 
 
-    public GameScreen(PokerGame pokerGame) {
-        this.pokerGame = pokerGame;
+    public GameScreen(CardGame cardGame) {
+        this.cardGame = cardGame;
         //zbudowanie okna i backendu
-        controller = new Controller(pokerGame, this);
+        controller = new Controller(cardGame, this);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
-        stage = new Stage(new ScreenViewport(), pokerGame.getBatch());
+        stage = new Stage(new ScreenViewport(), cardGame.getBatch());
 
         controller.setupActors(); //tworzymy elementy gry
 
@@ -69,7 +69,7 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(Color.DARK_GRAY);
 
         camera.update();
-        pokerGame.getBatch().setProjectionMatrix(camera.combined);
+        cardGame.getBatch().setProjectionMatrix(camera.combined);
         stage.act(delta); //aktorzy wykonują swoje akcje
         stage.draw(); //renderujemy aktora dla danej klatki
         //todo debug

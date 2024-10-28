@@ -10,16 +10,15 @@ import java.util.Map;
 
 public class Controller implements Mediator {
 
-    private PokerService pokerService = new PokerService();
-    private PokerGameRules pokerGameRules = new PokerGameRules();
-    private PokerGame pokerGame;
+    private GameService gameService = new GameService();
+    private CardGame cardGame;
     private DeckGroup deck;
     private Map<Integer, PlayerGroup> players = new HashMap<>();
     private GameScreen gameScreen;
 
 
-    public Controller(PokerGame pokerGame, GameScreen gameScreen) {
-        this.pokerGame = pokerGame;
+    public Controller(CardGame cardGame, GameScreen gameScreen) {
+        this.cardGame = cardGame;
         this.gameScreen = gameScreen;
     }
 
@@ -29,13 +28,13 @@ public class Controller implements Mediator {
     }
 
     void createPlayer() {
-        List<Player> playersList = pokerService.getPlayers();
+        List<Player> playersList = gameService.getPlayers();
         PokerGameLayout layout = new PokerGameLayout();
         for (Player player : playersList) {
             PokerGameLayout.PlayerLayout playerLayout = layout.getLayoutFor(player.getId());
             MoneyActor moneyActor = null;
             if (playerLayout.isWithMoney()) {
-                moneyActor = new MoneyActor(player.getMoney(), pokerGame.getFont(), playerLayout.isMovable(), playerLayout.getMoneyDirection(), this);
+                moneyActor = new MoneyActor(player.getMoney(), cardGame.getFont(), playerLayout.isMovable(), playerLayout.getMoneyDirection(), this);
             }
 
             HandGroup hand = new HandGroup(playerLayout.getHandDirection(), this);
@@ -51,15 +50,15 @@ public class Controller implements Mediator {
     }
 
     void startGame() {
-        pokerGameRules.getStartCommands()
+        gameService.getStartCommands()
                 .forEach(this::playCommand);
-        pokerService.printStatus();
+        gameService.printStatus();
         //todo po lewej na czym wywyołujemy np nazwa klasy przy metodach statycznych, this jeśli to jest ten obiekt :: po prawej jest nazwa metyody którą chcemy wywołać, bez parametrów -
         //todo metod reference możemy użyć jeżeli nie ma parametrów lub jest oczywiste np tak jak w tym przypadku
     }
 
     private void playCommand(Command command) {
-        boolean success = pokerService.executeCommand(command);
+        boolean success = gameService.executeCommand(command);
         if (success) {
             executeCommand(command);
         }
@@ -97,7 +96,7 @@ public class Controller implements Mediator {
     }
 
     public List<Card> getDeckCards() {
-        return pokerService.getDeckCards();
+        return gameService.getDeckCards();
     }
 
     public DeckGroup getDeck() {
@@ -117,7 +116,7 @@ public class Controller implements Mediator {
     }
 
     private PlayerGroup getDealer() {
-        return players.get(pokerGameRules.getIdBy(PlayerType.DEALER));
+        return players.get(gameService.getIdBy(PlayerType.DEALER));
     }
 
     //controller.spawnNewThing(A a)

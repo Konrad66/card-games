@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class PokerGame extends Game {
+public class CardGame extends Game {
 
     private BitmapFont font;
     private SpriteBatch batch;
