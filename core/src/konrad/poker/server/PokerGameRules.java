@@ -1,7 +1,6 @@
 package konrad.poker.server;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class PokerGameRules extends GameRules {
@@ -20,20 +19,15 @@ public class PokerGameRules extends GameRules {
     }
 
     @Override
-    public List<Command> getStartCommands() {
+    List<Command> getCommands() {
         List<Command> commandList = new ArrayList<>();
         commandList.add(new Command(CommandType.BID, 1, 1));
         commandList.add(new Command(CommandType.BID, 2, 2));
-
-
         for (int i = 0; i < NUMBER_OF_COMPUTERS; i++) {
             commandList.add(new Command(CommandType.DRAW, 2, players.get(i).id()));
         }
         commandList.add(new Command(CommandType.DRAW, 2, HUMAN_ID));
         commandList.add(new Command(CommandType.DRAW, 3, DEALER_ID));
-        commandList.sort(Comparator.comparingInt(Command::getPlayerId));
-        //todo przeanalizowac
-        commandList.sort((command1, command2) -> command1.getPlayerId() - command2.getPlayerId());
-        return commandList;
+        return getStartCommands();
     }
 }
