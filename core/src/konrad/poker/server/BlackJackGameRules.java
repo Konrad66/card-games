@@ -6,10 +6,7 @@ import java.util.List;
 
 public class BlackJackGameRules extends GameRules {
 
-    private List<PlayerScheme> players = new ArrayList<>();
     private static final int NUMBER_OF_COMPUTERS = 4;
-    private static final int DEALER_ID = 6;
-    private static final int HUMAN_ID = 3;
 
     public BlackJackGameRules() {
         for (int i = 1; players.size() < NUMBER_OF_COMPUTERS; i++) {
@@ -34,21 +31,5 @@ public class BlackJackGameRules extends GameRules {
         //todo przeanalizowac
         commandList.sort((command1, command2) -> command1.getPlayerId() - command2.getPlayerId());
         return commandList;
-    }
-
-    @Override
-    public List<PlayerScheme> getPlayers() {
-        return players;
-    }
-
-    @Override
-    public int getIdBy(PlayerType type) {
-        if (type.equals(PlayerType.DEALER)) {
-            return DEALER_ID;
-        } else if (type.equals(PlayerType.HUMAN)) {
-            return HUMAN_ID;
-        } else {
-            return 1;
-        }
     }
 }

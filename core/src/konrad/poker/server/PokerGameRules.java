@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class PokerGameRules extends GameRules{
+public class PokerGameRules extends GameRules {
 
-    private List<PlayerScheme> players = new ArrayList<>();
     private static final int NUMBER_OF_COMPUTERS = 4;
-    private static final int DEALER_ID = 6;
-    private static final int HUMAN_ID = 3;
 
     public PokerGameRules() {
         for (int i = 1; players.size() < NUMBER_OF_COMPUTERS; i++) {
@@ -22,6 +19,7 @@ public class PokerGameRules extends GameRules{
         players.add(new PlayerScheme(DEALER_ID, PlayerType.DEALER, false));
     }
 
+    @Override
     public List<Command> getStartCommands() {
         List<Command> commandList = new ArrayList<>();
         commandList.add(new Command(CommandType.BID, 1, 1));
@@ -37,19 +35,5 @@ public class PokerGameRules extends GameRules{
         //todo przeanalizowac
         commandList.sort((command1, command2) -> command1.getPlayerId() - command2.getPlayerId());
         return commandList;
-    }
-
-    public List<PlayerScheme> getPlayers() {
-        return players;
-    }
-
-    public int getIdBy(PlayerType type){
-        if (type.equals(PlayerType.DEALER)){
-            return DEALER_ID;
-        } else if (type.equals(PlayerType.HUMAN)) {
-            return HUMAN_ID;
-        } else {
-            return 1;
-        }
     }
 }
