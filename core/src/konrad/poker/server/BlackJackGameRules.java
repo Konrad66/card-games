@@ -5,8 +5,6 @@ import java.util.List;
 
 public class BlackJackGameRules extends GameRules {
 
-    private static final int NUMBER_OF_COMPUTERS = 4;
-
     public BlackJackGameRules() {
         for (int i = 1; players.size() < NUMBER_OF_COMPUTERS; i++) {
             if (i == HUMAN_ID) {
@@ -19,12 +17,9 @@ public class BlackJackGameRules extends GameRules {
     }
 
     @Override
-    List<Command> getCommands() {
+    List<Command> getStartCommandsUnsorted() {
         List<Command> commandList = new ArrayList<>();
-        for (int i = 0; i < NUMBER_OF_COMPUTERS; i++) {
-            commandList.add(new Command(CommandType.DRAW, 2, players.get(i).id()));
-        }
-        commandList.add(new Command(CommandType.DRAW, 2, HUMAN_ID));
+        commandList.addAll(prepareDrawCommand(2));
         commandList.add(new Command(CommandType.DRAW, 1, DEALER_ID));
         return commandList;
     }

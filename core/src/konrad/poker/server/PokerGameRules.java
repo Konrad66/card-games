@@ -5,8 +5,6 @@ import java.util.List;
 
 public class PokerGameRules extends GameRules {
 
-    private static final int NUMBER_OF_COMPUTERS = 4;
-
     public PokerGameRules() {
         for (int i = 1; players.size() < NUMBER_OF_COMPUTERS; i++) {
             if (i == HUMAN_ID) {
@@ -19,14 +17,13 @@ public class PokerGameRules extends GameRules {
     }
 
     @Override
-    List<Command> getCommands() {
+    List<Command> getStartCommandsUnsorted() {
         List<Command> commandList = new ArrayList<>();
         commandList.add(new Command(CommandType.BID, 1, 1));
         commandList.add(new Command(CommandType.BID, 2, 2));
-        for (int i = 0; i < NUMBER_OF_COMPUTERS; i++) {
-            commandList.add(new Command(CommandType.DRAW, 2, players.get(i).id()));
-        }
-        commandList.add(new Command(CommandType.DRAW, 2, HUMAN_ID));
+
+        commandList.addAll(prepareDrawCommand(2));
+
         commandList.add(new Command(CommandType.DRAW, 3, DEALER_ID));
         return getStartCommands();
     }
