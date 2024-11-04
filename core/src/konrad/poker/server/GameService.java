@@ -1,8 +1,5 @@
 package konrad.poker.server;
 
-import konrad.poker.client.Color;
-import konrad.poker.client.Rank;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

@@ -1,4 +1,4 @@
-package konrad.poker.client;
+package konrad.poker.client.actors;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmptyMoneyActor extends MoneyActor{
+public class EmptyMoneyActor extends MoneyActor {
 
     private static final EmptyMoneyActor instance = new EmptyMoneyActor();
 

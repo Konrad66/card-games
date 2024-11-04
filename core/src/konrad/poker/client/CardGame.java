@@ -14,7 +14,8 @@ public class CardGame extends Game {
     public void create() {
         font = new BitmapFont();
         batch = new SpriteBatch();
-        setScreen(new GameScreen(this));
+        setScreen(new MenuScreen(this));
+        //setScreen(new GameScreen(this));
     }
 
     @Override

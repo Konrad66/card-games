@@ -1,5 +1,7 @@
 package konrad.poker.client;
 
+import konrad.poker.client.actors.Direction;
+
 public class PokerGameLayout {
 
     PlayerLayout getLayoutFor(int position) {

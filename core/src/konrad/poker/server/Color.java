@@ -1,4 +1,4 @@
-package konrad.poker.client;
+package konrad.poker.server;
 
 public enum Color {
     CLUBS("clubs"), DIAMONDS("diamonds"), HEARTS("hearts"), SPADES("spades");

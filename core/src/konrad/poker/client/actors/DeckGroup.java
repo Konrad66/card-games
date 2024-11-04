@@ -1,5 +1,6 @@
-package konrad.poker.client;
+package konrad.poker.client.actors;
 
+import konrad.poker.client.*;
 import konrad.poker.server.Card;
 
 import java.util.Deque;

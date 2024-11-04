@@ -1,4 +1,4 @@
-package konrad.poker.client;
+package konrad.poker.server;
 
 public enum Rank {
 

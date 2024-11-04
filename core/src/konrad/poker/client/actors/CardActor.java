@@ -1,8 +1,10 @@
-package konrad.poker.client;
+package konrad.poker.client.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import konrad.poker.client.Dimensions;
+import konrad.poker.client.Mediator;
 import konrad.poker.server.Card;
 
 public class CardActor extends MyActor {

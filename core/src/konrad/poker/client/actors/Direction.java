@@ -1,4 +1,4 @@
-package konrad.poker.client;
+package konrad.poker.client.actors;
 
 public enum Direction {
     LEFT, RIGHT

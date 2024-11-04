@@ -1,4 +1,4 @@
-package konrad.poker.client;
+package konrad.poker.client.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import konrad.poker.client.Dimensions;
+import konrad.poker.client.Mediator;
 
 import java.util.List;
 
@@ -51,7 +53,6 @@ public class MoneyActor extends MyActor {
         //batch.draw(texture, getX(), getY(), getWidth(), getHeight());
         font.setColor(Color.GREEN);
         font.draw(batch, money + "", getX() + getWidth() / 2 - 15, getHeight() / 2 + 5 + getY()); //todo dynamiczne wyliczanie
-        super.draw(batch, parentAlpha);
     }
 
     public boolean movable() {

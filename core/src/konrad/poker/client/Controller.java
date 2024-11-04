@@ -2,6 +2,10 @@ package konrad.poker.client;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import konrad.poker.client.actors.DeckGroup;
+import konrad.poker.client.actors.HandGroup;
+import konrad.poker.client.actors.MoneyActor;
+import konrad.poker.client.actors.PlayerGroup;
 import konrad.poker.server.*;
 
 import java.util.HashMap;

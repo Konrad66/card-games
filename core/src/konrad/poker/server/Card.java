@@ -1,8 +1,5 @@
 package konrad.poker.server;
 
-import konrad.poker.client.Color;
-import konrad.poker.client.Rank;
-
 public class Card {
 
     private Color color;
