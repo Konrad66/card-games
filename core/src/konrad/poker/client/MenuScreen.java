@@ -15,14 +15,14 @@ public class MenuScreen implements Screen {
     private Stage stage;
     private CardGame cardGame;
 
+
     public MenuScreen(CardGame cardGame) {
         this.cardGame = cardGame;
-
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         stage = new Stage(new ScreenViewport(), cardGame.getBatch());
-        MenuOptionActor poker = new MenuOptionActor(cardGame.getFont(), "Poker");
-        MenuOptionActor blackJack = new MenuOptionActor(cardGame.getFont(), "BlackJack");
+        MenuOptionActor poker = new MenuOptionActor(cardGame.getFont(), "Poker", "poker.png");
+        MenuOptionActor blackJack = new MenuOptionActor(cardGame.getFont(), "BlackJack", "blackjack.png");
         blackJack.setY(Dimensions.CARD_WEIGHT);
 
         stage.addActor(poker);

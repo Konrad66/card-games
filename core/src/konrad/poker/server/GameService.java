@@ -11,6 +11,7 @@ public class GameService {
     private List<Player> players = new ArrayList<>();
     private GameRules gameRules = new BlackJackGameRules();
 
+    //todo konstruktor powinien zarządzać przełączaniem między grą
 
     public GameService() {
         createCards();
