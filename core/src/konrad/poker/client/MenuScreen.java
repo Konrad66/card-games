@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -21,14 +23,27 @@ public class MenuScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         stage = new Stage(new ScreenViewport(), cardGame.getBatch());
-        MenuOptionActor poker = new MenuOptionActor(cardGame.getFont(), "Poker", "poker.png", cardGame);
-        MenuOptionActor blackJack = new MenuOptionActor(cardGame.getFont(), "BlackJack", "blackjack.png",cardGame);
+
+        MenuOptionActor poker = new MenuOptionActor(cardGame.getFont(), "Poker", "poker.png");
+        poker.addAction(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                cardGame.changeScreenToPoker();
+                return true;
+            }
+        });
+        MenuOptionActor blackJack = new MenuOptionActor(cardGame.getFont(), "BlackJack", "blackjack.png");
+        blackJack.addAction(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                cardGame.changeScreenToBlackJack();
+                return true;
+            }
+        });
         blackJack.setY(Dimensions.CARD_WEIGHT);
         stage.addActor(poker);
         stage.addActor(blackJack);
         Gdx.input.setInputProcessor(stage);
-
-
     }
 
     @Override
