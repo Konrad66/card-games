@@ -21,13 +21,13 @@ public class MenuScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         stage = new Stage(new ScreenViewport(), cardGame.getBatch());
-        MenuOptionActor poker = new MenuOptionActor(cardGame.getFont(), "Poker", "poker.png");
-        MenuOptionActor blackJack = new MenuOptionActor(cardGame.getFont(), "BlackJack", "blackjack.png");
+        MenuOptionActor poker = new MenuOptionActor(cardGame.getFont(), "Poker", "poker.png", cardGame);
+        MenuOptionActor blackJack = new MenuOptionActor(cardGame.getFont(), "BlackJack", "blackjack.png",cardGame);
         blackJack.setY(Dimensions.CARD_WEIGHT);
-
         stage.addActor(poker);
         stage.addActor(blackJack);
         Gdx.input.setInputProcessor(stage);
+
 
     }
 

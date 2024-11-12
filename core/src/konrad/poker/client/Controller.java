@@ -2,10 +2,7 @@ package konrad.poker.client;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import konrad.poker.client.actors.DeckGroup;
-import konrad.poker.client.actors.HandGroup;
-import konrad.poker.client.actors.MoneyActor;
-import konrad.poker.client.actors.PlayerGroup;
+import konrad.poker.client.actors.*;
 import konrad.poker.server.*;
 
 import java.util.HashMap;
@@ -14,16 +11,17 @@ import java.util.Map;
 
 public class Controller implements Mediator {
 
-    private GameService gameService = new GameService();
+    private GameService gameService;
     private CardGame cardGame;
     private DeckGroup deck;
     private Map<Integer, PlayerGroup> players = new HashMap<>();
     private GameScreen gameScreen;
 
 
-    public Controller(CardGame cardGame, GameScreen gameScreen) {
+    public Controller(CardGame cardGame, GameScreen gameScreen, GameService gameService) {
         this.cardGame = cardGame;
         this.gameScreen = gameScreen;
+        this.gameService = gameService;
     }
 
     void setupActors() {

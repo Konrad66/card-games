@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import konrad.poker.client.actors.DeckGroup;
 import konrad.poker.client.actors.PlayerGroup;
+import konrad.poker.server.GameService;
 
 import java.util.Map;
 
@@ -21,10 +22,10 @@ public class GameScreen implements Screen {
     private Stage stage;
 
 
-    public GameScreen(CardGame cardGame) {
+    public GameScreen(CardGame cardGame, GameService gameService) {
         this.cardGame = cardGame;
         //zbudowanie okna i backendu
-        controller = new Controller(cardGame, this);
+        controller = new Controller(cardGame, this, gameService);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         stage = new Stage(new ScreenViewport(), cardGame.getBatch());

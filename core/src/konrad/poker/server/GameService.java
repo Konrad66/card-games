@@ -9,11 +9,10 @@ public class GameService {
 
     private List<Card> cardDeck = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
-    private GameRules gameRules = new BlackJackGameRules();
+    private GameRules gameRules;
 
-    //todo konstruktor powinien zarządzać przełączaniem między grą
-
-    public GameService() {
+    public GameService(GameRules gameRules) {
+        this.gameRules = gameRules;
         createCards();
         shuffleDeck();
         createPlayers();
@@ -50,6 +49,7 @@ public class GameService {
         }
     }
 
+
     public List<Command> getStartCommands() {
         return gameRules.getStartCommands();
     }
@@ -58,16 +58,8 @@ public class GameService {
         return gameRules.getIdBy(type);
     }
 
-    public Card getCard() {
-        return cardDeck.get(4);
-    }
-
     public List<Player> getPlayers() {
         return players;
-    }
-
-    public Card getDeckCard(int i) {
-        return cardDeck.get(i);
     }
 
     public boolean executeCommand(Command command) {

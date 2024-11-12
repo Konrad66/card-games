@@ -25,6 +25,6 @@ public class PokerGameRules extends GameRules {
         commandList.addAll(prepareDrawCommand(2));
 
         commandList.add(new Command(CommandType.DRAW, 3, DEALER_ID));
-        return getStartCommands();
+        return commandList;
     }
 }
