@@ -24,26 +24,25 @@ public class MenuScreen implements Screen {
         camera.setToOrtho(false, Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         stage = new Stage(new ScreenViewport(), cardGame.getBatch());
 
-        MenuOptionActor poker = new MenuOptionActor(cardGame.getFont(), "Poker", "poker.png");
-        poker.addAction(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                cardGame.changeScreenToPoker();
-                return true;
-            }
-        });
-        MenuOptionActor blackJack = new MenuOptionActor(cardGame.getFont(), "BlackJack", "blackjack.png");
-        blackJack.addAction(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                cardGame.changeScreenToBlackJack();
-                return true;
-            }
-        });
+        MenuOptionActor poker = new MenuOptionActor("Poker", "poker.png");
+        poker.addAction(prepareAction(() -> cardGame.changeScreenToPoker()));
+        MenuOptionActor blackJack = new MenuOptionActor("BlackJack", "blackjack.png");
+        blackJack.addAction(prepareAction(() -> cardGame.changeScreenToBlackJack()));
         blackJack.setY(Dimensions.CARD_WEIGHT);
         stage.addActor(poker);
         stage.addActor(blackJack);
         Gdx.input.setInputProcessor(stage);
+        //Consumer, Supplier,
+    }
+
+    private InputListener prepareAction(Runnable action) {
+        return new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                action.run();
+                return true;
+            }
+        };
     }
 
     @Override
