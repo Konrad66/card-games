@@ -24,13 +24,16 @@ public class MenuScreen implements Screen {
         camera.setToOrtho(false, Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         stage = new Stage(new ScreenViewport(), cardGame.getBatch());
 
-        MenuOptionActor poker = new MenuOptionActor("Poker", "poker.png");
-        poker.addAction(prepareAction(() -> cardGame.changeScreenToPoker()));
+        MenuOptionActor pokerHoldem = new MenuOptionActor("Poker", "pokerHoldem.png");
+        pokerHoldem.addAction(prepareAction(() -> cardGame.changeScreenToPokerHoldem()));
         MenuOptionActor blackJack = new MenuOptionActor("BlackJack", "blackjack.png");
         blackJack.addAction(prepareAction(() -> cardGame.changeScreenToBlackJack()));
         blackJack.setY(Dimensions.CARD_WEIGHT);
-        stage.addActor(poker);
+        MenuOptionActor classicPoker = new MenuOptionActor("ClassicPoker", "classicPoker.png");
+        classicPoker.addAction(prepareAction(() -> cardGame.changeScreenToClassicPoker()));
+        stage.addActor(pokerHoldem);
         stage.addActor(blackJack);
+        stage.addActor(classicPoker);
         Gdx.input.setInputProcessor(stage);
         //Consumer, Supplier,
     }

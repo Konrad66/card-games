@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import konrad.poker.server.BlackJackGameRules;
 import konrad.poker.server.GameService;
-import konrad.poker.server.PokerGameRules;
+import konrad.poker.server.ClassicPokerGameRules;
+import konrad.poker.server.PokerHoldemGameRules;
 
 public class CardGame extends Game {
 
@@ -38,13 +39,18 @@ public class CardGame extends Game {
         return font;
     }
 
-    public void changeScreenToPoker() {
-        gameScreen = new GameScreen(this, new GameService(new PokerGameRules()));
+    public void changeScreenToPokerHoldem() {
+        gameScreen = new GameScreen(this, new GameService(new PokerHoldemGameRules()));
         setScreen(gameScreen);
     }
 
     public void changeScreenToBlackJack() {
         gameScreen = new GameScreen(this, new GameService(new BlackJackGameRules()));
+        setScreen(gameScreen);
+    }
+
+    public void changeScreenToClassicPoker(){
+        gameScreen = new GameScreen(this, new GameService(new ClassicPokerGameRules()));
         setScreen(gameScreen);
     }
 }
