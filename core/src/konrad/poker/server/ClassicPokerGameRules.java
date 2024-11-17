@@ -13,6 +13,7 @@ public class ClassicPokerGameRules extends GameRules{
             players.add(new PlayerScheme(i, PlayerType.COMPUTER, true));
         }
         players.add(new PlayerScheme(HUMAN_ID, PlayerType.HUMAN, false));
+        players.add(new PlayerScheme(DEALER_ID, PlayerType.DEALER, false));
     }
 
     @Override

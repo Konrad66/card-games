@@ -31,6 +31,8 @@ public class MenuScreen implements Screen {
         blackJack.setY(Dimensions.CARD_WEIGHT);
         MenuOptionActor classicPoker = new MenuOptionActor("ClassicPoker", "classicPoker.png");
         classicPoker.addAction(prepareAction(() -> cardGame.changeScreenToClassicPoker()));
+        classicPoker.setX(Dimensions.WINDOW_WIDTH / 3.75f);
+        classicPoker.setY(Dimensions.WINDOW_HEIGHT / 2f);
         stage.addActor(pokerHoldem);
         stage.addActor(blackJack);
         stage.addActor(classicPoker);
