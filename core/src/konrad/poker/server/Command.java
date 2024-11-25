@@ -5,6 +5,7 @@ public class Command {
     private CommandType type;
     private int amount;
     private int playerId;
+    private int playerBid;
 
 
     public Command(CommandType type, int amount, int playerId) {
@@ -23,6 +24,14 @@ public class Command {
 
     public int getPlayerId() {
         return playerId;
+    }
+
+    public int getPlayerBid() {
+        return playerBid;
+    }
+
+    public void setPlayerBid(int playerBid) {
+        this.playerBid = playerBid;
     }
 
     @Override

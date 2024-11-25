@@ -10,6 +10,7 @@ public class GameService {
     private List<Card> cardDeck = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
     private GameRules gameRules;
+    private int stake = 0;
 
     public GameService(GameRules gameRules) {
         this.gameRules = gameRules;
@@ -67,10 +68,12 @@ public class GameService {
             case DRAW:
                 getPlayerById(command.getPlayerId()).drawCard(cardDeck, command.getAmount());
                 break;
-            case BID:
-                getPlayerById(command.getPlayerId()).placeBid(command.getAmount());
-                //todo ustawic 6 -> jako dynamiczne wybieranie dealera
-                getPlayerById(6).placeBid(command.getAmount());
+            case RISE:
+                stake += command.getAmount();
+
+                int playerBid = getPlayerById(command.getPlayerId()).placeBid(stake);
+                command.setPlayerBid(playerBid);
+                getPlayerById(GameRules.DEALER_ID).receive(playerBid);
                 break;
         }
         return true;
@@ -98,5 +101,6 @@ public class GameService {
         for (Player player : players) {
             System.out.println(player);
         }
+        System.out.println("Nasz stake" + stake);
     }
 }

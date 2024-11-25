@@ -9,6 +9,7 @@ public class Player {
     int money;
     private int id;
     private boolean hiddenCards;
+    private int actuallySpent = 0;
 
     public Player(int money, int id, boolean hiddenCards) {
         this.money = money;
@@ -36,8 +37,15 @@ public class Player {
         }
     }
 
-    public void placeBid(int bid) {
-        money -= bid;
+    public int placeBid(int stake) {
+        int howMuchToSpent = stake - actuallySpent;
+        money -= howMuchToSpent;
+        actuallySpent += howMuchToSpent;
+        return howMuchToSpent;
+    }
+
+    public void receive(int dealerMoney){
+        this.money += dealerMoney;
     }
 
     public List<Card> getPlayerCards() {

@@ -31,13 +31,17 @@ public class MenuScreen implements Screen {
         blackJack.setY(Dimensions.CARD_WEIGHT);
         MenuOptionActor classicPoker = new MenuOptionActor("ClassicPoker", "classicPoker.png");
         classicPoker.addAction(prepareAction(() -> cardGame.changeScreenToClassicPoker()));
-        classicPoker.setX(Dimensions.WINDOW_WIDTH / 3.75f);
-        classicPoker.setY(Dimensions.WINDOW_HEIGHT / 2f);
+        classicPoker.setX(Dimensions.WINDOW_WIDTH - Dimensions.CARD_WEIGHT * 7f - Dimensions.MARGIN);
+//        classicPoker.setX(Dimensions.WINDOW_WIDTH / 3.75f);
+        classicPoker.setY(Dimensions.WINDOW_HEIGHT - Dimensions.CARD_HEIGHT * 2f - Dimensions.MARGIN);
+//        classicPoker.setY(Dimensions.WINDOW_HEIGHT / 2f);
         stage.addActor(pokerHoldem);
         stage.addActor(blackJack);
         stage.addActor(classicPoker);
         Gdx.input.setInputProcessor(stage);
         //Consumer, Supplier,
+
+        //todo działa menu screen na game screenie
     }
 
     private InputListener prepareAction(Runnable action) {
