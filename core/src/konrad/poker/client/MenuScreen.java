@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import konrad.poker.client.actors.MenuOptionActor;
+import konrad.poker.client.actors.ButtonActor;
 
 public class MenuScreen implements Screen {
 
@@ -24,12 +24,17 @@ public class MenuScreen implements Screen {
         camera.setToOrtho(false, Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         stage = new Stage(new ScreenViewport(), cardGame.getBatch());
 
-        MenuOptionActor pokerHoldem = new MenuOptionActor("Poker", "pokerHoldem.png");
+
+        //todo nie powtarzać tego samego 3 razy
+        ButtonActor pokerHoldem = new ButtonActor("Poker", "pokerHoldem.png");
+        pokerHoldem.setBounds(100, 500, Dimensions.WINDOW_WIDTH / 4f, Dimensions.WINDOW_HEIGHT / 4f);
         pokerHoldem.addAction(prepareAction(() -> cardGame.changeScreenToPokerHoldem()));
-        MenuOptionActor blackJack = new MenuOptionActor("BlackJack", "blackjack.png");
+        ButtonActor blackJack = new ButtonActor("BlackJack", "blackjack.png");
+        blackJack.setBounds(100, 500, Dimensions.WINDOW_WIDTH / 4f, Dimensions.WINDOW_HEIGHT / 4f);
         blackJack.addAction(prepareAction(() -> cardGame.changeScreenToBlackJack()));
         blackJack.setY(Dimensions.CARD_WEIGHT);
-        MenuOptionActor classicPoker = new MenuOptionActor("ClassicPoker", "classicPoker.png");
+        ButtonActor classicPoker = new ButtonActor("ClassicPoker", "classicPoker.png");
+        classicPoker.setBounds(100, 500, Dimensions.WINDOW_WIDTH / 4f, Dimensions.WINDOW_HEIGHT / 4f);
         classicPoker.addAction(prepareAction(() -> cardGame.changeScreenToClassicPoker()));
         classicPoker.setX(Dimensions.WINDOW_WIDTH - Dimensions.CARD_WEIGHT * 7f - Dimensions.MARGIN);
 //        classicPoker.setX(Dimensions.WINDOW_WIDTH / 3.75f);

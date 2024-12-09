@@ -13,7 +13,7 @@ public class PokerGameLayout {
         int yUp = Dimensions.WINDOW_HEIGHT / 2 + Dimensions.MARGIN;
         switch (position) {
             case 3:
-                playerLayout.x = Dimensions.WINDOW_WIDTH / 3;
+                playerLayout.x = Dimensions.WINDOW_WIDTH / 4;
                 playerLayout.y = Dimensions.MARGIN;
                 playerLayout.movable = true;
                 playerLayout.handDirection = Direction.RIGHT;

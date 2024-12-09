@@ -127,6 +127,10 @@ public class Controller implements Mediator {
         return players.get(gameService.getIdBy(PlayerType.DEALER));
     }
 
+    public PlayerGroup getHumanPlayer(){
+        return players.get(gameService.getIdBy(PlayerType.HUMAN));
+    }
+
     //controller.spawnNewThing(A a)
     //controller.playCommand(C c)
 }

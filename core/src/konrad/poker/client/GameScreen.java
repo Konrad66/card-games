@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import konrad.poker.client.actors.ControlGroup;
 import konrad.poker.client.actors.DeckGroup;
 import konrad.poker.client.actors.PlayerGroup;
 import konrad.poker.server.GameService;
@@ -43,10 +44,15 @@ public class GameScreen implements Screen {
         stage.addActor(deckGroup);
 
         //todo ustawić centrum
-        deckGroup.setX(Dimensions.CENTER_X - Dimensions.CARD_WEIGHT/2f);
+        deckGroup.setX(Dimensions.CENTER_X - Dimensions.CARD_WEIGHT / 2f);
         //deckGroup.setX(Dimensions.CENTER_X - Dimensions.CARD_WEIGHT/2f);
         //deckGroup.setY(Dimensions.CENTER_Y - Dimensions.CARD_HEIGHT/2f);
         deckGroup.setY(Dimensions.WINDOW_HEIGHT - Dimensions.CARD_HEIGHT - Dimensions.MARGIN);
+        ControlGroup controlGroup = new ControlGroup();
+        stage.addActor(controlGroup);
+        PlayerGroup humanPlayer = controller.getHumanPlayer();
+        controlGroup.setX(humanPlayer.getX());
+        controlGroup.setY(humanPlayer.getY() + Dimensions.CARD_HEIGHT + Dimensions.MARGIN / 2f);
 
         controller.startGame(); //rozpoczecie gry (rozdawanie itd)
 
@@ -55,11 +61,11 @@ public class GameScreen implements Screen {
 
     }
 
-    public void addToStage(Actor actor){
+    public void addToStage(Actor actor) {
         stage.addActor(actor);
     }
 
-    public void removeFromStage(Actor actor){
+    public void removeFromStage(Actor actor) {
         stage.getRoot().removeActor(actor);
     }
 
