@@ -1,6 +1,8 @@
 package konrad.poker.client.actors;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import konrad.poker.client.Dimensions;
 
 public class ControlGroup extends Group {
@@ -15,6 +17,11 @@ public class ControlGroup extends Group {
     private ButtonActor riseButton = new ButtonActor("Rise", "blackjack.png");
 
     public ControlGroup() {
+        setButtons();
+        addActions();
+    }
+
+    private void setButtons() {
         callButton.setBounds(0, 0, Dimensions.CARD_HEIGHT, BUTTON_HEIGHT);
         checkButton.setBounds(BUTTON_WIDTH + MARGIN, 0, BUTTON_WIDTH, BUTTON_HEIGHT);
         foldButton.setBounds((BUTTON_WIDTH * 2f) + MARGIN* 2, 0, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -24,8 +31,26 @@ public class ControlGroup extends Group {
         addActor(foldButton);
         addActor(riseButton);
     }
+
+
+    public void addActions(){
+        callButton.addAction(prepareAction(() -> System.out.println("call")));
+        checkButton.addAction(prepareAction(() -> System.out.println("check")));
+    }
+
+
+    //todo powtórka z MenuScreena
+    private InputListener prepareAction(Runnable action) {
+        return new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                action.run();
+                return true;
+            }
+        };
+    }
 }
 
 
-
+//todo ustawiać pozycje pętlą, dodać je do zbioru i dzięki pętli ustawiać ich pozycję
 //todo zrobić animacje dla grupy przycisków, żeby leciały od środka i "rozdawały się" podobnie jak karty

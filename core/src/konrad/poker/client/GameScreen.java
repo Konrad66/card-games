@@ -1,5 +1,6 @@
 package konrad.poker.client;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -30,6 +31,7 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         stage = new Stage(new ScreenViewport(), cardGame.getBatch());
+        Gdx.input.setInputProcessor(stage);
 
 
         controller.setupActors(); //tworzymy elementy gry
@@ -53,6 +55,7 @@ public class GameScreen implements Screen {
         PlayerGroup humanPlayer = controller.getHumanPlayer();
         controlGroup.setX(humanPlayer.getX());
         controlGroup.setY(humanPlayer.getY() + Dimensions.CARD_HEIGHT + Dimensions.MARGIN / 2f);
+
 
         controller.startGame(); //rozpoczecie gry (rozdawanie itd)
 

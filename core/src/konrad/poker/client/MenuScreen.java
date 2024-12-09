@@ -23,6 +23,7 @@ public class MenuScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         stage = new Stage(new ScreenViewport(), cardGame.getBatch());
+        Gdx.input.setInputProcessor(stage);
 
 
         //todo nie powtarzać tego samego 3 razy
@@ -43,11 +44,12 @@ public class MenuScreen implements Screen {
         stage.addActor(pokerHoldem);
         stage.addActor(blackJack);
         stage.addActor(classicPoker);
-        Gdx.input.setInputProcessor(stage);
+
         //Consumer, Supplier,
 
         //todo działa menu screen na game screenie
     }
+
 
     private InputListener prepareAction(Runnable action) {
         return new InputListener() {

@@ -131,6 +131,10 @@ public class Controller implements Mediator {
         return players.get(gameService.getIdBy(PlayerType.HUMAN));
     }
 
+    public void addControlButtonActions(){
+        //todo button action
+    }
+
     //controller.spawnNewThing(A a)
     //controller.playCommand(C c)
 }
