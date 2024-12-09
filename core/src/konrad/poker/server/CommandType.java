@@ -1,6 +1,6 @@
 package konrad.poker.server;
 
 public enum CommandType {
-    DRAW, RISE;
+    DRAW, RISE, CALL, CHECK, FOLD;
 
 }

@@ -21,6 +21,10 @@ public class PokerHoldemGameRules extends GameRules {
         List<Command> commandList = new ArrayList<>();
         commandList.add(new Command(CommandType.RISE, 1, 1));
         commandList.add(new Command(CommandType.RISE, 1, 2));
+        commandList.add(new Command(CommandType.CALL, 3));
+        commandList.add(new Command(CommandType.CALL, 4));
+        commandList.add(new Command(CommandType.CALL, 5));
+
 
         commandList.addAll(prepareDrawCommand(2));
 

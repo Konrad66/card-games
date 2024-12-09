@@ -72,7 +72,13 @@ public class Controller implements Mediator {
                 deck.playerDraws(players.get(command.getPlayerId()), command.getAmount());
                 break;
             case RISE:
+            case CALL:
                 players.get(command.getPlayerId()).placeBidWithAnimation(command.getPlayerBid());
+                break;
+            case CHECK:
+                break;
+            case FOLD:
+                //todo wyszarzyć gracza w momencie użycia tej komendy
                 break;
         }
     }

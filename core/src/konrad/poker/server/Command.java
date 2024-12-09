@@ -7,10 +7,15 @@ public class Command {
     private int playerId;
     private int playerBid;
 
-
+//todo różne sposoby budowania komend
     public Command(CommandType type, int amount, int playerId) {
         this.type = type;
         this.amount = amount;
+        this.playerId = playerId;
+    }
+
+    public Command(CommandType type, int playerId){
+        this.type = type;
         this.playerId = playerId;
     }
 

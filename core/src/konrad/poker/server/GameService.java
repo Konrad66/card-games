@@ -69,11 +69,15 @@ public class GameService {
                 getPlayerById(command.getPlayerId()).drawCard(cardDeck, command.getAmount());
                 break;
             case RISE:
+            case CALL:
                 stake += command.getAmount();
-
                 int playerBid = getPlayerById(command.getPlayerId()).placeBid(stake);
                 command.setPlayerBid(playerBid);
                 getPlayerById(GameRules.DEALER_ID).receive(playerBid);
+                break;
+            case CHECK:
+                break;
+            case FOLD:
                 break;
         }
         return true;
