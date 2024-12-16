@@ -59,7 +59,7 @@ public class Controller implements Mediator {
         //todo metod reference możemy użyć jeżeli nie ma parametrów lub jest oczywiste np tak jak w tym przypadku
     }
 
-    private void playCommand(Command command) {
+    private void playCommand(Command command) { //call -> amount -1 id 3
         boolean success = gameService.executeCommand(command);
         if (success) {
             executeCommand(command);
@@ -82,6 +82,7 @@ public class Controller implements Mediator {
                 break;
         }
     }
+//
 
     @Override
     public void spawnNewThing(Actor actor) {
@@ -97,6 +98,15 @@ public class Controller implements Mediator {
     public void increaseDealerMoney(int receivedMoney) {
         getDealer().increaseDealerMoney(receivedMoney);
     }
+
+    @Override
+    public void executeHumanCommand(CommandType commandType, int amount) {
+        Command command = new Command(commandType, amount, getHumanId());
+        System.out.println(command);
+        playCommand(command);
+        //todo dokończyć
+    }
+
 
     @Override
     public Vector2 getDealerMoneyVector() {
@@ -128,7 +138,11 @@ public class Controller implements Mediator {
     }
 
     public PlayerGroup getHumanPlayer(){
-        return players.get(gameService.getIdBy(PlayerType.HUMAN));
+        return players.get(getHumanId());
+    }
+
+    private int getHumanId(){
+        return gameService.getIdBy(PlayerType.HUMAN);
     }
 
     public void addControlButtonActions(){

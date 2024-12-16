@@ -9,6 +9,9 @@ public class Command {
 
 //todo różne sposoby budowania komend
     public Command(CommandType type, int amount, int playerId) {
+        if (amount < 0) {
+            amount = 0;
+        }
         this.type = type;
         this.amount = amount;
         this.playerId = playerId;
@@ -48,3 +51,7 @@ public class Command {
                 '}';
     }
 }
+
+//interfejs tworzenia komend dla humana
+//interfejs tworzenia komend dla systemu
+//interfejs tworzenia komend na start
