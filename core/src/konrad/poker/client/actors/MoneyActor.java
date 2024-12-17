@@ -35,8 +35,6 @@ public class MoneyActor extends MyActor {
         this.money = money;
         this.mediator = mediator;
         texture = new Texture(Gdx.files.internal("token/token.png"));
-        setX(-Dimensions.MONEY_SIZE / 8);
-        setY(yOffset);
         setWidth(Dimensions.MONEY_SIZE);
         setHeight(Dimensions.MONEY_SIZE);
     }
@@ -104,8 +102,6 @@ public class MoneyActor extends MyActor {
         money -= bidValue;
         MoneyActor bidActor = new MoneyActor(bidValue, font, false, Direction.LEFT, mediator);
         Vector2 stageVector = getStageVector();
-        bidActor.setX(0);
-        bidActor.setY(0);
         bidActor.setX(stageVector.x);
         bidActor.setY(stageVector.y - yOffset);
         mediator.spawnNewThing(bidActor);

@@ -20,6 +20,6 @@ public class MyActor extends Actor {
     }
 
     Vector2 getStageVector() {
-        return localToStageCoordinates(new Vector2(getX(),getY()));
+        return localToStageCoordinates(new Vector2(0,0));
     }
 }
