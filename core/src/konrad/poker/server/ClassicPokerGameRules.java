@@ -3,18 +3,7 @@ package konrad.poker.server;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassicPokerGameRules extends GameRules{
-
-    public ClassicPokerGameRules() {
-        for (int i = 1; players.size() < NUMBER_OF_COMPUTERS; i++){
-            if (i == HUMAN_ID){
-                continue;
-            }
-            players.add(new PlayerScheme(i, PlayerType.COMPUTER, true));
-        }
-        players.add(new PlayerScheme(HUMAN_ID, PlayerType.HUMAN, false));
-        players.add(new PlayerScheme(DEALER_ID, PlayerType.DEALER, false));
-    }
+public class ClassicPokerGameRules extends GameRules {
 
     @Override
     List<Command> getStartCommandsUnsorted() {

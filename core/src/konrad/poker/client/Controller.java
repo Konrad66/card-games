@@ -52,6 +52,7 @@ public class Controller implements Mediator {
     }
 
     void startGame() {
+
         gameService.getStartCommands()
                 .forEach(this::playCommand);
         gameService.printStatus();
@@ -79,6 +80,8 @@ public class Controller implements Mediator {
                 break;
             case FOLD:
                 //todo wyszarzyć gracza w momencie użycia tej komendy
+                break;
+            case SETUP_DONE://todo można wykorzystać do pokzywania przycisków
                 break;
         }
     }
@@ -137,15 +140,15 @@ public class Controller implements Mediator {
         return players.get(gameService.getIdBy(PlayerType.DEALER));
     }
 
-    public PlayerGroup getHumanPlayer(){
+    public PlayerGroup getHumanPlayer() {
         return players.get(getHumanId());
     }
 
-    private int getHumanId(){
+    private int getHumanId() {
         return gameService.getIdBy(PlayerType.HUMAN);
     }
 
-    public void addControlButtonActions(){
+    public void addControlButtonActions() {
         //todo button action
     }
 

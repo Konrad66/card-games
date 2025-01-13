@@ -12,38 +12,38 @@ public class PokerGameLayout {
         int yDown =  Dimensions.WINDOW_HEIGHT / 3;
         int yUp = Dimensions.WINDOW_HEIGHT / 2 + Dimensions.MARGIN;
         switch (position) {
-            case 3:
+            case 2:
                 playerLayout.x = Dimensions.WINDOW_WIDTH / 4;
                 playerLayout.y = Dimensions.MARGIN;
                 playerLayout.movable = true;
                 playerLayout.handDirection = Direction.RIGHT;
                 playerLayout.moneyDirection = Direction.RIGHT;
                 break;
-            case 4: //lewy dół
+            case 3: //lewy dół
                 playerLayout.x =leftMargin;
                 playerLayout.y = yDown;
                 playerLayout.handDirection = Direction.RIGHT;
                 playerLayout.moneyDirection = Direction.LEFT;
                 break;
-            case 5: // lewa góra
+            case 4: // lewa góra
                 playerLayout.x =leftMargin;
                 playerLayout.y = yUp;
                 playerLayout.handDirection = Direction.RIGHT;
                 playerLayout.moneyDirection = Direction.LEFT;
                 break;
-            case 2: //prawy dół
+            case 1: //prawy dół
                 playerLayout.x = rightMargin;
                 playerLayout.y = yDown;
                 playerLayout.handDirection = Direction.LEFT;
                 playerLayout.moneyDirection = Direction.RIGHT;
                 break;
-            case 1: // prawa góra
+            case 0: // prawa góra
                 playerLayout.x = rightMargin;
                 playerLayout.y = yUp ;
                 playerLayout.handDirection = Direction.LEFT;
                 playerLayout.moneyDirection = Direction.RIGHT;
                 break;
-            case 6:
+            case 5:
                 //playerLayout.x = Dimensions.WINDOW_WIDTH / 3;
                 playerLayout.x = Dimensions.CENTER_X - Dimensions.CARD_WEIGHT/2;
                 playerLayout.y = Dimensions.CENTER_Y - Dimensions.CARD_HEIGHT/2;
@@ -53,7 +53,7 @@ public class PokerGameLayout {
                 playerLayout.moneyDirection = Direction.LEFT;
                 break;
             default:
-                throw new IllegalArgumentException("Valid positions: 1-6");
+                throw new IllegalArgumentException("Valid positions: 0-5");
         }
        return playerLayout;
     }

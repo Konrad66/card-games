@@ -7,7 +7,7 @@ public class Command {
     private int playerId;
     private int playerBid;
 
-//todo różne sposoby budowania komend
+    //todo różne sposoby budowania komend
     public Command(CommandType type, int amount, int playerId) {
         if (amount < 0) {
             amount = 0;
@@ -17,7 +17,7 @@ public class Command {
         this.playerId = playerId;
     }
 
-    public Command(CommandType type, int playerId){
+    public Command(CommandType type, int playerId) {
         this.type = type;
         this.playerId = playerId;
     }
@@ -26,7 +26,7 @@ public class Command {
         return type;
     }
 
-    public int getAmount(){
+    public int getAmount() {
         return amount;
     }
 
@@ -40,6 +40,10 @@ public class Command {
 
     public void setPlayerBid(int playerBid) {
         this.playerBid = playerBid;
+    }
+
+    public boolean isMainCommand() {
+        return type.isMainCommand();
     }
 
     @Override

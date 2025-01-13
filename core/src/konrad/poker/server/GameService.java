@@ -11,9 +11,11 @@ public class GameService {
     private List<Player> players = new ArrayList<>();
     private GameRules gameRules;
     private int stake = 0;
+    private int activePlayerIndex;
 
     public GameService(GameRules gameRules) {
         this.gameRules = gameRules;
+        activePlayerIndex = gameRules.getFirstPlayerId();
         createCards();
         shuffleDeck();
         createPlayers();
@@ -64,20 +66,44 @@ public class GameService {
     }
 
     public boolean executeCommand(Command command) {
+        if (command.isMainCommand()) {
+            return executeMainCommand(command);
+        } else {
+            return executeAdditionalCommand(command);
+        }
+    }
+
+    private boolean executeMainCommand(Command command) {
+        if (command.getPlayerId() != activePlayerIndex) {
+            //prawdopodobnie blokuje nam te pierwsze bidy, może maja zle ustawione plauer id?
+            System.out.println("blocked command: " + command);
+
+            return false;
+        }
         switch (command.getType()) {
-            case DRAW:
-                getPlayerById(command.getPlayerId()).drawCard(cardDeck, command.getAmount());
-                break;
             case RISE:
             case CALL:
                 stake += command.getAmount();
                 int playerBid = getPlayerById(command.getPlayerId()).placeBid(stake);
                 command.setPlayerBid(playerBid);
-                getPlayerById(GameRules.DEALER_ID).receive(playerBid);
+                getDealer().receive(playerBid);
                 break;
             case CHECK:
                 break;
             case FOLD:
+                break;
+        }
+        nextPlayer();
+        return true;
+    }
+
+    private boolean executeAdditionalCommand(Command command) {
+        switch (command.getType()) {
+            case DRAW:
+                getPlayerById(command.getPlayerId()).drawCard(cardDeck, command.getAmount());
+                break;
+            case SETUP_DONE:
+                //todo nothing to do yet
                 break;
         }
         return true;
@@ -94,11 +120,16 @@ public class GameService {
         return cardDeck;
     }
 
+    public Player getHuman() {
+        return players.get(gameRules.getHumanId());
+    }
+
+    public Player getDealer() {
+        return players.get(gameRules.getDealerId());
+    }
+
     private Player getPlayerById(int id) {
-        return players.stream()
-                .filter(player -> player.getId() == id)
-                .findAny()
-                .orElseThrow();
+        return players.get(id);
     }
 
     public void printStatus() {
@@ -106,5 +137,15 @@ public class GameService {
             System.out.println(player);
         }
         System.out.println("Nasz stake" + stake);
+    }
+
+    private void nextPlayer() {
+        activePlayerIndex++;
+        if (activePlayerIndex == getDealer().getId()) {
+            activePlayerIndex++;
+        }
+        if (activePlayerIndex == players.size()) {
+            activePlayerIndex = 0;
+        }
     }
 }
