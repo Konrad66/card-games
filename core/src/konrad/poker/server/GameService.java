@@ -148,4 +148,12 @@ public class GameService {
             activePlayerIndex = 0;
         }
     }
+
+    public boolean isHumanTurn() {
+        return activePlayerIndex == gameRules.getHumanId();
+    }
+
+    public Command getBotMainCommand() {
+        return new Command(CommandType.RISE, activePlayerIndex);
+    }
 }
