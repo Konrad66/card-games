@@ -12,6 +12,7 @@ public class GameService {
     private GameRules gameRules;
     private int stake = 0;
     private int activePlayerIndex;
+    private Client client;
 
     public GameService(GameRules gameRules) {
         this.gameRules = gameRules;
@@ -19,6 +20,10 @@ public class GameService {
         createCards();
         shuffleDeck();
         createPlayers();
+    }
+ //todo wytlumaczyc dlaczergo nie konstruktor
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     private void createCards() {
@@ -67,7 +72,12 @@ public class GameService {
 
     public boolean executeCommand(Command command) {
         if (command.isMainCommand()) {
-            return executeMainCommand(command);
+            boolean success =  executeMainCommand(command);
+            if (success && !isHumanTurn()) {
+                //todo zerknac co nie dziala, nie działa prawidłowe egzekwowanie rozdawania
+                client.sendCommand(getBotMainCommand());
+            }
+            return success;
         } else {
             return executeAdditionalCommand(command);
         }
@@ -157,3 +167,10 @@ public class GameService {
         return new Command(CommandType.RISE, activePlayerIndex);
     }
 }
+
+/*
+* client sends command ->
+* server handle it ->
+* if success animate ->
+
+* */

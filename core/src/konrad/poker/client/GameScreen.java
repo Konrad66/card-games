@@ -28,6 +28,7 @@ public class GameScreen implements Screen {
         this.cardGame = cardGame;
         //zbudowanie okna i backendu
         controller = new Controller(cardGame, this, gameService);
+        gameService.setClient(controller);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         stage = new Stage(new ScreenViewport(), cardGame.getBatch());
